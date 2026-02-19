@@ -42,7 +42,11 @@
         /* Hero Section */
         .hero {
             min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            /* Thay đổi URL ảnh ở đây: */
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.7) 0%, rgba(118, 75, 162, 0.7) 100%),
+                        url('images/hero-background.jpg') center/cover no-repeat;
+            /* Nếu chưa có ảnh, sẽ hiển thị gradient màu */
+            background-color: #667eea;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -73,6 +77,27 @@
             background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
                         radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
             animation: pulse 8s ease-in-out infinite;
+        }
+
+        .hero .wedding-text {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            opacity: 0.95;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 0.95;
+                transform: translateY(0);
+            }
         }
 
         @keyframes float {
@@ -140,6 +165,18 @@
             font-size: clamp(1.2rem, 3vw, 1.8rem);
             font-weight: 300;
             letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        .hero .thank-you {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 20px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.8s both;
         }
 
         .scroll-indicator {
@@ -534,10 +571,15 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
+            <div class="wedding-text">Wedding</div>
             <h1>You're Invited to Celebrate</h1>
             <div class="couple-names">John & Jane</div>
             <div class="divider"></div>
             <div class="date">June 15, 2026</div>
+            <div class="thank-you">
+                Cảm ơn bạn đã đồng hành cùng chúng tôi trong hành trình tình yêu này.<br>
+                Sự hiện diện của bạn sẽ làm cho ngày trọng đại của chúng tôi thêm ý nghĩa!
+            </div>
         </div>
         <div class="scroll-indicator"></div>
     </section>
