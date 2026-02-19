@@ -485,6 +485,18 @@
             font-size: 4rem;
         }
 
+        /* Styles for actual images */
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
         /* Footer */
         footer {
             background: var(--text-dark);
@@ -646,7 +658,11 @@
         <div class="container">
             <h2 class="section-title">Gallery</h2>
             <div class="gallery-grid">
+                <!-- Để thêm ảnh: Thay thế class="gallery-placeholder" bằng <img src="images/photo1.jpg" alt="Photo"> -->
+                <!-- Hoặc dùng link: <img src="https://your-image-url.com/photo.jpg" alt="Photo"> -->
+                
                 <div class="gallery-item">
+                    <!-- Ví dụ: <img src="images/photo1.jpg" alt="Couple Photo" class="gallery-img"> -->
                     <div class="gallery-placeholder">📸</div>
                 </div>
                 <div class="gallery-item">
