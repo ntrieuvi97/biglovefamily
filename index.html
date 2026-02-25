@@ -2349,6 +2349,25 @@
             }
         }
 
+        /* Music Status Message */
+        .music-status {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 12px;
+            max-width: 280px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 9998;
+            opacity: 0;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
         /* Mobile responsive */
         @media (max-width: 768px) {
             .vinyl-player {
@@ -2685,13 +2704,18 @@
             </div>
         </div>
         <!-- Hidden audio element -->
-        <audio id="musicFrame" autoplay loop preload="auto" style="display: none;">
+        <audio id="musicFrame" loop preload="metadata" style="display: none;">
             <source src="audio/wedding-song.mp3" type="audio/mpeg">
             <source src="audio/wedding-song.ogg" type="audio/ogg">
             <source src="audio/wedding-song.wav" type="audio/wav">
             <!-- Fallback demo audio for testing -->
             <source src="https://www.soundjay.com/misc/sounds-1/beep-3.mp3" type="audio/mpeg">
         </audio>
+        
+        <!-- Music Status Indicator -->
+        <div id="musicStatus" class="music-status" style="display: none;">
+            <span id="musicStatusText">🎵 Nhạc cưới sẽ phát sau khi bạn tương tác với trang</span>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -2807,48 +2831,23 @@
 
                 console.log('🎵 Audio event listeners added');
 
-                // TỰ ĐỘNG PHÁT NHẠC NGAY KHI LOAD TRANG
+                // THỬ PHÁT NHẠC TỰ ĐỘNG (GitHub Pages thường chặn)
                 setTimeout(() => {
-                    console.log('🎵 Attempting autoplay...');
-
+                    console.log('🎵 Attempting initial autoplay...');
+                    
                     // Đảm bảo volume được bật
-                    musicFrame.volume = 1.0;
+                    musicFrame.volume = 0.5; // Đặt volume thấp một chút
                     musicFrame.muted = false;
 
                     musicFrame.play().then(() => {
                         console.log('🎵 ✅ Autoplay SUCCESS! Music started automatically');
-                        // Vinyl sẽ tự động xoay qua event listener 'play'
+                        hideStatusMessage();
                     }).catch(error => {
-                        console.log('🎵 ⚠️ Autoplay BLOCKED by browser:', error);
-                        console.log('🎵 Music will start on first user interaction');
-
-                        // Fallback: Chờ user interaction
-                        let firstInteraction = true;
-                        const startMusicOnInteraction = () => {
-                            if (firstInteraction) {
-                                firstInteraction = false;
-                                // Đảm bảo volume được bật
-                                musicFrame.volume = 1.0;
-                                musicFrame.muted = false;
-                                musicFrame.play().then(() => {
-                                    console.log('🎵 ✅ Music started after user interaction');
-                                }).catch(e => {
-                                    console.log('🎵 ❌ Failed to start music:', e);
-                                });
-
-                                // Remove event listeners after first use
-                                document.removeEventListener('click', startMusicOnInteraction);
-                                document.removeEventListener('touchstart', startMusicOnInteraction);
-                                document.removeEventListener('keydown', startMusicOnInteraction);
-                            }
-                        };
-
-                        // Listen for any user interaction
-                        document.addEventListener('click', startMusicOnInteraction, { once: true });
-                        document.addEventListener('touchstart', startMusicOnInteraction, { once: true });
-                        document.addEventListener('keydown', startMusicOnInteraction, { once: true });
+                        console.log('🎵 ⚠️ Autoplay BLOCKED by browser (normal on GitHub Pages):', error);
+                        showStatusMessage();
+                        setupUserInteractionListener();
                     });
-                }, 500); // Delay 500ms để đảm bảo all elements đã load
+                }, 500); // Đợi 500ms để page load hoàn toàn
 
             } else {
                 console.error('❌ Audio element not found!');
@@ -2873,6 +2872,80 @@
                 console.log('🎵 Vinyl disc hover effects added');
             }
         });
+
+        // Helper functions for autoplay management
+        function showStatusMessage() {
+            const statusDiv = document.getElementById('musicStatus');
+            if (statusDiv) {
+                statusDiv.style.display = 'block';
+                setTimeout(() => {
+                    statusDiv.style.opacity = '1';
+                }, 100);
+                
+                // Auto hide after 5 seconds
+                setTimeout(() => {
+                    hideStatusMessage();
+                }, 5000);
+            }
+        }
+        
+        function hideStatusMessage() {
+            const statusDiv = document.getElementById('musicStatus');
+            if (statusDiv) {
+                statusDiv.style.opacity = '0';
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                }, 300);
+            }
+        }
+        
+        function setupUserInteractionListener() {
+            let hasStarted = false;
+            
+            const startMusicOnInteraction = (event) => {
+                if (!hasStarted) {
+                    hasStarted = true;
+                    console.log('🎵 User interaction detected, starting music...');
+                    
+                    const musicFrame = document.getElementById('musicFrame');
+                    if (musicFrame) {
+                        musicFrame.volume = 0.5;
+                        musicFrame.muted = false;
+                        
+                        musicFrame.play().then(() => {
+                            console.log('🎵 ✅ Music started successfully after user interaction');
+                            hideStatusMessage();
+                            
+                            // Update status
+                            const statusText = document.getElementById('musicStatusText');
+                            if (statusText) {
+                                statusText.textContent = '🎵 Đang phát nhạc cưới';
+                            }
+                        }).catch(e => {
+                            console.log('🎵 ❌ Failed to start music after interaction:', e);
+                            const statusText = document.getElementById('musicStatusText');
+                            if (statusText) {
+                                statusText.textContent = '❌ Không thể phát nhạc';
+                            }
+                        });
+                    }
+                    
+                    // Remove listeners after first successful interaction
+                    document.removeEventListener('click', startMusicOnInteraction);
+                    document.removeEventListener('touchstart', startMusicOnInteraction);
+                    document.removeEventListener('keydown', startMusicOnInteraction);
+                    document.removeEventListener('scroll', startMusicOnInteraction);
+                }
+            };
+            
+            // Add listeners for various user interactions
+            document.addEventListener('click', startMusicOnInteraction);
+            document.addEventListener('touchstart', startMusicOnInteraction);
+            document.addEventListener('keydown', startMusicOnInteraction);
+            document.addEventListener('scroll', startMusicOnInteraction);
+            
+            console.log('🎵 User interaction listeners added');
+        }
 
         // Countdown Timer
         function updateCountdown() {
