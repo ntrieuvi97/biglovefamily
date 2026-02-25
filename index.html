@@ -1515,7 +1515,7 @@
             grid-template-columns: 1fr;
             gap: 10px;
         }
-        
+
 
         /* Animation */
         @keyframes fadeIn {
@@ -2804,7 +2804,7 @@
             <div class="story-hero">
                 <img src="images/SHO05837.JPG" alt="">
             </div>
-            <div class="story-hero" ">
+            <div class="story-hero">
                     <img src=" images/story-4.jpg" alt="Right love | Right reason | Right for you">
 
             </div>
@@ -2856,6 +2856,17 @@
         </div>
     </section>
 
+    <!-- Music Player Section -->
+    <section class="music-section">
+        <div class="music-player" id="musicPlayer">
+            <iframe width="560" height="315"
+                src="https://www.youtube.com/embed/ZalqX-zmTTw?si=VWQUj97GVYISoMHU&amp;start=10"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="heart">♥</div>
@@ -2865,10 +2876,6 @@
             Thank you for being part of our special day
         </p>
     </footer>
-
-    <iframe scrolling="no" width=600 height=180 src=https://zingmp3.vn/embed/song/Z7FDDIOI?start=true frameborder="0"
-        allowfullscreen="true" allow="autoplay">
-    </iframe>
     </div>
 
     <script>
@@ -2892,12 +2899,10 @@
                 musicText.textContent = 'Tắt nhạc';
                 musicToggle.classList.remove('muted');
 
-                // Reload iframe để bắt đầu phát nhạc lại
-                const currentSrc = musicFrame.src;
-                musicFrame.src = '';
-                setTimeout(() => {
-                    musicFrame.src = currentSrc;
-                }, 100);
+                // Reload YouTube iframe
+                if (musicFrame) {
+                    musicFrame.src = 'https://www.youtube.com/embed/ZalqX-zmTTw?si=P05yv6PVWJHJNWRX&controls=0&start=10&autoplay=1&loop=1';
+                }
 
                 isMusicMuted = false;
             } else {
@@ -2907,8 +2912,8 @@
                 musicText.textContent = 'Bật nhạc';
                 musicToggle.classList.add('muted');
 
-                // Remove iframe src để dừng nhạc
-                musicFrame.src = '';
+                // Remove iframe src
+                if (musicFrame) musicFrame.src = '';
 
                 isMusicMuted = true;
             }
@@ -2921,10 +2926,10 @@
             const musicPlayer = document.getElementById('musicPlayer');
 
             if (musicFrame) {
-                console.log('Current src:', musicFrame.src);
-                // Force reload
-                musicFrame.src = 'https://zingmp3.vn/embed/song/ZW6DIA67?start=true&autoplay=true';
-                console.log('🎵 Music reloaded with autoplay');
+                console.log('Current iframe src:', musicFrame.src);
+                // Force reload with autoplay
+                musicFrame.src = 'https://www.youtube.com/embed/ZalqX-zmTTw?si=P05yv6PVWJHJNWRX&controls=0&start=10&autoplay=1&loop=1';
+                console.log('🎵 YouTube music reloaded with autoplay');
             }
 
             if (musicPlayer) {
@@ -2978,8 +2983,11 @@
                     // Tự động load và phát nhạc khi user click lần đầu
                     console.log('🎵 Loading music on first user interaction');
                     const musicFrame = document.getElementById('musicFrame');
-                    if (musicFrame && musicFrame.src === '') {
-                        musicFrame.src = 'https://zingmp3.vn/embed/song/ZW6DIA67?start=true';
+                    const audioPlayer = document.getElementById('audioPlayer');
+
+                    if (musicFrame) {
+                        musicFrame.src = 'https://www.youtube.com/embed/ZalqX-zmTTw?si=P05yv6PVWJHJNWRX&controls=0&start=10&autoplay=1&loop=1';
+                        console.log('🎵 YouTube iframe loaded on first click');
                     }
                 }
             }, { once: true });
