@@ -412,8 +412,8 @@
         }
 
         .story-hero img {
-            width: 100%;
-            height: 130%;
+            width: 120%;
+            height: 100%;
             object-fit: cover;
             position: absolute;
             top: 0;
@@ -1733,6 +1733,204 @@
                 min-height: 600px;
             }
         }
+
+        /* Our Story Section */
+        .our-story-section {
+            background: linear-gradient(135deg, #fdf8f3 0%, #f5f2ec 100%);
+            padding: 80px 30px;
+            position: relative;
+        }
+
+        .story-timeline {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .story-images-collage {
+            position: relative;
+            height: 600px;
+        }
+
+        .story-main-image {
+            position: absolute;
+            top: 0;
+            left: 20px;
+            width: 500px;
+            height: 600px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            transform: rotate(-2deg);
+            z-index: 2;
+        }
+
+        .story-main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .story-secondary-image {
+            position: absolute;
+            top: 500px;
+            right: 0;
+            width: 250px;
+            height: 300px;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: rotate(3deg);
+            z-index: 2;
+        }
+
+        .story-secondary-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .story-accent-image {
+            position: absolute;
+            top: 520px;
+            left: 300px;
+            width: 180px;
+            height: 240px;
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transform: rotate(-5deg);
+            z-index: 3;
+        }
+
+        .story-accent-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .story-content-section {
+            padding: 0 40px;
+        }
+
+        .story-title-main {
+            font-size: 48px;
+            font-family: 'Great Vibes', cursive;
+            color: #8b6f47;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .story-paragraphs {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .story-paragraph {
+            padding: 20px 0;
+        }
+
+        .story-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4af37 0%, #f1c40f 100%);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .story-text {
+            font-size: 20px;
+            font-family: 'Great Vibes', cursive;
+            color: #8b6f47;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .story-description {
+            font-size: 15px;
+            font-family: 'Cormorant Garamond', serif;
+            color: #666;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .story-ornament {
+            text-align: center;
+            font-size: 24px;
+            color: #d4af37;
+            margin: 20px 0;
+            opacity: 0.8;
+        }
+
+        /* Responsive for Our Story */
+        @media (max-width: 900px) {
+            .our-story-section {
+                padding: 60px 20px;
+            }
+
+            .story-timeline {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .story-images-collage {
+                height: 400px;
+                margin: 0 auto;
+                max-width: 350px;
+            }
+
+            .story-main-image {
+                width: 280px;
+                height: 350px;
+                left: 50%;
+                transform: translateX(-50%) rotate(-2deg);
+            }
+
+            .story-secondary-image {
+                width: 200px;
+                height: 130px;
+                bottom: 20px;
+                right: -20px;
+            }
+
+            .story-accent-image {
+                width: 120px;
+                height: 160px;
+                top: 50px;
+                right: 10px;
+            }
+
+            .story-content-section {
+                padding: 0 20px;
+            }
+
+            .story-title-main {
+                font-size: 36px;
+            }
+
+            .story-text {
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 
@@ -1779,7 +1977,7 @@
             <div class="story-container" style="margin-top: -1px;">
                 <!-- Image 1 - First Meeting -->
                 <div class="story-hero" style="margin-top: 0; width: 100%;">
-                    <img src="images/SHO05963.JPG" alt="Right love | Right reason | Right for you">
+                    <img src="images/studio-3.JPG" alt="Right love | Right reason | Right for you">
                     <div class="welcome-hero-overlay"
                         style="font-family: 'Playfair Display', serif; opacity: 0.8;letter-spacing: 8px;">
                         <h3>RIGHT LOVE | RIGHT REASON </h3>
@@ -1801,24 +1999,24 @@
                     <p class="invitation-text-elegant">
                         Gửi đến bạn tấm thiệp cưới đầy yêu thương.
                     </p>
-            
+
                     <p class="invitation-text-elegant">
                         Những ai nhận được lời mời này đều là những người đặc biệt với bọn mình.
                     </p>
-            
+
                     <p class="invitation-text-elegant">
                         Mong bạn và gia đình sẽ đến chung vui, cùng chứng kiến khoảnh khắc hạnh phúc nhất của hai đứa.
                     </p>
-            
+
                     <p class="invitation-text-elegant">
                         Cảm ơn vì luôn bên cạnh và yêu thương.
                     </p>
-            
+
                     <p class="invitation-text-elegant final-wish">
                         Hy vọng bạn sẽ là người chứng kiến khoảnh khắc quan trọng<br>
                         nhất trong cuộc đời chúng mình!
                     </p>
-            
+
                     <div class="invitation-heart">♥♥♥</div>
                 </div>
             </div>
@@ -1830,9 +2028,10 @@
                 <!-- Wedding Calendar Card with Background Image -->
                 <div class="event-calendar-card">
                     <div class="event-calendar-background"></div>
-                    
+
                     <div class="event-calendar-content">
-                        <div class="handwritten-text" style="opacity: 90%; text-align: center; font-size: 60px;">Save The Date</div>
+                        <div class="handwritten-text" style="opacity: 90%; text-align: center; font-size: 60px;">Save
+                            The Date</div>
                         <!-- Calendar Overlay-->
                         <div class="calendar-overlay">
                             <div class="wedding-calendar">
@@ -1885,7 +2084,7 @@
                     </div>
                     <div class="handwritten-text" style="opacity: 90%; margin: 30px 30px;">Perfect</div>
                 </div>
-                
+
             </div>
             <!-- Luxury Calendar Visual -->
             <div class="calendar-countdown-section">
@@ -1971,6 +2170,70 @@
                 </div>
             </div>
         </section>
+
+        <!-- Our Story Section -->
+        <section class="our-story-section">
+            <h2 class="section-title" style="color: #8b6f47; margin-bottom: 20px;">Câu Chuyện Của Chúng Mình</h2>
+            <div class="divider" style="background: #d4af37;"></div>
+            <p class="section-text" style="color: #666; margin-bottom: 60px;">
+                Hành trình tình yêu từ những ngày đầu đến khi quyết định bên nhau trọn đời
+            </p>
+
+            <div class="story-timeline">
+                <!-- Story Images Collage -->
+                <div class="story-images-collage">
+                    <div class="story-main-image">
+                        <img src="images/studio-3.JPG" alt="Nàng xinh đẹp như công chúa">
+                    </div>
+
+                </div>
+                <div class="story-secondary-image">
+                    <img src="images/story-1.JPG" alt="Chàng say đắm tương tư">
+                </div>
+                <div class="story-secondary-image">
+                    <img src="images/story-2.JPG" alt="Chàng say đắm tương tư">
+                </div>
+
+                <!-- Story Content
+                <div class="story-content-section">
+                    <h3 class="story-title-main">Our Love Story</h3>
+                    
+                    <div class="story-paragraphs">
+                        <div class="story-paragraph">
+                            <div class="story-number">1</div>
+                            <div class="story-text">Nàng xinh đẹp như một cô công chúa cổ tích</div>
+                            <div class="story-description">
+                                Lần đầu gặp gỡ, chàng đã bị thu hút bởi vẻ đẹp trong treo và nụ cười rạng rỡ của nàng.
+                                Như một cô công chúa bước ra từ truyện cổ tích, nàng đã làm tim chàng rung động.
+                            </div>
+                        </div>
+
+                        <div class="story-ornament">✧ ♡ ✧</div>
+
+                        <div class="story-paragraph">
+                            <div class="story-number">2</div>
+                            <div class="story-text">Chàng say đắm ôm mộng tương tư</div>
+                            <div class="story-description">
+                                Từ những cuộc trò chuyện đầu tiên, chàng đã biết mình đã tìm thấy người đặc biệt.
+                                Mỗi ngày trôi qua đều ngập tràn những suy nghĩ về nàng, tình yêu đơm hoa kết trái.
+                            </div>
+                        </div>
+
+                        <div class="story-ornament">✧ ♡ ✧</div>
+
+                        <div class="story-paragraph">
+                            <div class="story-number">3</div>
+                            <div class="story-text">Và hôm nay, chúng ta đã thành đôi</div>
+                            <div class="story-description">
+                                Sau bao ngày tháng yêu thương và hiểu biết lẫn nhau, chúng mình đã quyết định
+                                bước vào cuộc sống hôn nhân. Hôm nay là khởi đầu cho một chương mới đầy hạnh phúc.
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </section>
+
 
         <!-- RSVP Section -->
         <section class="section section-alt">
