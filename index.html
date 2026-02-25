@@ -2350,23 +2350,6 @@
         }
 
         /* Music Status Message */
-        .music-status {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: linear-gradient(135deg, #4a90e2, #357abd);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 25px;
-            font-size: 12px;
-            max-width: 280px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 9998;
-            opacity: 0;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
 
         /* Mobile responsive */
         @media (max-width: 768px) {
@@ -2711,11 +2694,6 @@
             <!-- Fallback demo audio for testing -->
             <source src="https://www.soundjay.com/misc/sounds-1/beep-3.mp3" type="audio/mpeg">
         </audio>
-        
-        <!-- Music Status Indicator -->
-        <div id="musicStatus" class="music-status" style="display: none;">
-            <span id="musicStatusText">🎵 Nhạc cưới sẽ phát sau khi bạn tương tác với trang</span>
-        </div>
     </div>
 
     <!-- Footer -->
@@ -2831,23 +2809,39 @@
 
                 console.log('🎵 Audio event listeners added');
 
-                // THỬ PHÁT NHẠC TỰ ĐỘNG (GitHub Pages thường chặn)
-                setTimeout(() => {
-                    console.log('🎵 Attempting initial autoplay...');
-                    
-                    // Đảm bảo volume được bật
-                    musicFrame.volume = 0.5; // Đặt volume thấp một chút
+                // PHÁT NHẠC KHI SCROLL HOẶC CLICK - VỚI DEBUG
+                let hasPlayed = false;
+
+                const tryPlayMusic = (eventType = 'unknown') => {
+                    console.log(`🎵 ${eventType} event fired! hasPlayed: ${hasPlayed}`);
+
+                    if (hasPlayed) return;
+
+                    hasPlayed = true;
+                    console.log('🎵 First interaction detected, playing music...');
+
+                    musicFrame.volume = 0.5;
                     musicFrame.muted = false;
 
                     musicFrame.play().then(() => {
-                        console.log('🎵 ✅ Autoplay SUCCESS! Music started automatically');
-                        hideStatusMessage();
+                        console.log('🎵 ✅ Music playing successfully');
                     }).catch(error => {
-                        console.log('🎵 ⚠️ Autoplay BLOCKED by browser (normal on GitHub Pages):', error);
-                        showStatusMessage();
-                        setupUserInteractionListener();
+                        console.log('🎵 ❌ Cannot play music:', error);
                     });
-                }, 500); // Đợi 500ms để page load hoàn toàn
+
+                    // Remove listeners after attempt
+                    window.removeEventListener('scroll', scrollHandler);
+                    document.removeEventListener('click', clickHandler);
+                };
+
+                // Separate handlers
+                const scrollHandler = () => tryPlayMusic('scroll');
+                const clickHandler = () => tryPlayMusic('click');
+
+                // Add listeners
+                window.addEventListener('scroll', scrollHandler);
+                document.addEventListener('click', clickHandler);
+                console.log('🎵 Music listeners added - try scrolling or clicking!');
 
             } else {
                 console.error('❌ Audio element not found!');
@@ -2873,79 +2867,6 @@
             }
         });
 
-        // Helper functions for autoplay management
-        function showStatusMessage() {
-            const statusDiv = document.getElementById('musicStatus');
-            if (statusDiv) {
-                statusDiv.style.display = 'block';
-                setTimeout(() => {
-                    statusDiv.style.opacity = '1';
-                }, 100);
-                
-                // Auto hide after 5 seconds
-                setTimeout(() => {
-                    hideStatusMessage();
-                }, 5000);
-            }
-        }
-        
-        function hideStatusMessage() {
-            const statusDiv = document.getElementById('musicStatus');
-            if (statusDiv) {
-                statusDiv.style.opacity = '0';
-                setTimeout(() => {
-                    statusDiv.style.display = 'none';
-                }, 300);
-            }
-        }
-        
-        function setupUserInteractionListener() {
-            let hasStarted = false;
-            
-            const startMusicOnInteraction = (event) => {
-                if (!hasStarted) {
-                    hasStarted = true;
-                    console.log('🎵 User interaction detected, starting music...');
-                    
-                    const musicFrame = document.getElementById('musicFrame');
-                    if (musicFrame) {
-                        musicFrame.volume = 0.5;
-                        musicFrame.muted = false;
-                        
-                        musicFrame.play().then(() => {
-                            console.log('🎵 ✅ Music started successfully after user interaction');
-                            hideStatusMessage();
-                            
-                            // Update status
-                            const statusText = document.getElementById('musicStatusText');
-                            if (statusText) {
-                                statusText.textContent = '🎵 Đang phát nhạc cưới';
-                            }
-                        }).catch(e => {
-                            console.log('🎵 ❌ Failed to start music after interaction:', e);
-                            const statusText = document.getElementById('musicStatusText');
-                            if (statusText) {
-                                statusText.textContent = '❌ Không thể phát nhạc';
-                            }
-                        });
-                    }
-                    
-                    // Remove listeners after first successful interaction
-                    document.removeEventListener('click', startMusicOnInteraction);
-                    document.removeEventListener('touchstart', startMusicOnInteraction);
-                    document.removeEventListener('keydown', startMusicOnInteraction);
-                    document.removeEventListener('scroll', startMusicOnInteraction);
-                }
-            };
-            
-            // Add listeners for various user interactions
-            document.addEventListener('click', startMusicOnInteraction);
-            document.addEventListener('touchstart', startMusicOnInteraction);
-            document.addEventListener('keydown', startMusicOnInteraction);
-            document.addEventListener('scroll', startMusicOnInteraction);
-            
-            console.log('🎵 User interaction listeners added');
-        }
 
         // Countdown Timer
         function updateCountdown() {
@@ -3247,6 +3168,36 @@
                 }
             });
         });
+
+        let globalMusicTriggered = false;
+
+        const globalMusicHandler = (eventType) => {
+            if (globalMusicTriggered) return;
+
+            console.log(`🎵 Global ${eventType} detected!`);
+            globalMusicTriggered = true;
+
+            const audio = document.getElementById('musicFrame');
+            if (audio) {
+                audio.volume = 0.5;
+                audio.muted = false;
+                audio.play()
+                    .then(() => console.log('🎵 ✅ Global music playing'))
+                    .catch(e => console.log('🎵 ❌ Global music failed:', e));
+            }
+
+            // Cleanup
+            window.removeEventListener('scroll', globalScrollHandler);
+            document.removeEventListener('click', globalClickHandler);
+        };
+
+        const globalScrollHandler = () => globalMusicHandler('scroll');
+        const globalClickHandler = () => globalMusicHandler('click');
+
+        // Add global listeners immediately
+        window.addEventListener('scroll', globalScrollHandler);
+        document.addEventListener('click', globalClickHandler);
+        console.log('🎵 Global music listeners active - scroll or click anywhere!');
     </script>
 </body>
 
