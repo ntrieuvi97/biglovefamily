@@ -878,76 +878,180 @@
             margin-top: 5px;
         }
 
-        /* RSVP Form */
+        /* RSVP Section */
+        .rsvp-section {
+            background: linear-gradient(135deg, #f8f6f0 0%, #ede9e0 100%);
+            padding: 80px 30px;
+            position: relative;
+        }
+
+        .rsvp-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23f0ede6" fill-opacity="0.1"><circle cx="30" cy="30" r="4"/></g></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .rsvp-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .rsvp-title {
+            font-size: 48px;
+            font-family: 'Great Vibes', cursive;
+            color: #8b6f47;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .rsvp-subtitle {
+            font-size: 18px;
+            font-family: 'Cormorant Garamond', serif;
+            color: #666;
+            text-align: center;
+            margin-bottom: 50px;
+            font-style: italic;
+        }
+
         .rsvp-form {
-            background: linear-gradient(135deg, #fefcf9 0%, #f5f2eb 100%);
-            padding: 40px;
-            border-radius: 20px;
-            margin: 30px auto;
-            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 40px;
+            border-radius: 25px;
             box-shadow:
-                0 15px 35px rgba(139, 111, 71, 0.1),
-                0 5px 15px rgba(139, 111, 71, 0.08);
-            border: 2px solid rgba(212, 175, 55, 0.2);
+                0 25px 60px rgba(0, 0, 0, 0.1),
+                0 10px 30px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .rsvp-form::before {
+            content: '♥';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            color: #d4af37;
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             text-align: left;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: 500;
+            margin-bottom: 12px;
+            color: #8b6f47;
+            font-weight: 600;
+            font-size: 16px;
+            font-family: 'Playfair Display', serif;
         }
 
-        .form-group input,
-        .form-group textarea {
+        .form-group input {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 5px;
-            font-family: Georgia, serif;
-            font-size: 14px;
-            transition: border 0.3s;
+            padding: 18px 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+            box-sizing: border-box;
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group input:focus {
             outline: none;
-            border-color: #764ba2;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
+            border-color: #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
         }
 
         .radio-group {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
-        .radio-group label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .radio-option {
+            position: relative;
+            padding: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.6);
+            text-align: center;
         }
 
-        .radio-group input[type="radio"] {
-            width: auto;
+        .radio-option:hover {
+            border-color: #d4af37;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .radio-option.selected {
+            background: linear-gradient(135deg, #d4af37 0%, #f1c40f 100%);
+            color: white;
+            border-color: #d4af37;
+        }
+
+        .radio-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .radio-option-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .radio-option-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 16px;
         }
 
         .submit-btn {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            background: linear-gradient(135deg, #d4af37 0%, #f1c40f 100%);
             color: white;
             border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
             border-radius: 5px;
             font-size: 16px;
             font-weight: bold;
@@ -1164,6 +1268,37 @@
 
             .photo-item.large {
                 grid-column: span 1;
+            }
+
+            /* RSVP responsive */
+            .rsvp-section {
+                padding: 60px 20px;
+            }
+
+            .rsvp-container {
+                max-width: 100%;
+            }
+
+            .rsvp-title {
+                font-size: 36px;
+            }
+
+            .rsvp-form {
+                padding: 30px 20px;
+                margin: 0 10px;
+            }
+
+            .radio-group {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .radio-option {
+                padding: 15px;
+            }
+
+            .radio-option-text {
+                font-size: 14px;
             }
 
             /* Story responsive */
@@ -2285,7 +2420,8 @@
                         <h3>FALL IN LOVE</h3>
                     </div>
                 </div>
-                <div class="story-hero" style="margin-top: 0; width: 100%;height: 800px;padding: 30px; align-content: center;">
+                <div class="story-hero"
+                    style="margin-top: 0; width: 100%;height: 800px;padding: 30px; align-content: center;">
                     <img src="images/SHO05837.JPG" alt="" style="width: 100%;left: 30px;">
                 </div>
                 <div class="story-hero" style="margin-top: 9px; width: 100%;padding: 30px; left: 20px">
@@ -2296,7 +2432,8 @@
                         <h3>BIG LOVE FAMILY</h3>
                     </div>
                 </div>
-                <div class="story-hero" style="margin-top: 0; width: 100%;padding: 30px; align-content: center; left: 20px">
+                <div class="story-hero"
+                    style="margin-top: 0; width: 100%;padding: 30px; align-content: center; left: 20px">
                     <img src="images/story-both-5.jpg" alt="Right love | Right reason | Right for you"
                         style="width: 100%;filter: brightness(1.1)">
                     <div class="welcome-hero-overlay"
@@ -2309,159 +2446,363 @@
 
 
         <!-- RSVP Section -->
-        <section class="section section-alt">
-            <h2 class="section-title">Xác Nhận Tham Dự</h2>
-            <div class="divider"></div>
-            <p class="section-text">
-                Cảm ơn bạn rất nhiều vì đã gửi những lời chúc tốt đẹp nhất đến đám cưới của chúng mình
-            </p>
+        <section class="rsvp-section">
+            <div class="rsvp-container">
+                <h2 class="rsvp-title">Xác Nhận Tham Dự</h2>
+                <p class="rsvp-subtitle">
+                    Mong bạn sẽ là người chứng kiến khoảnh khắc quan trọng nhất của chúng mình
+                </p>
 
-            <form class="rsvp-form" id="rsvpForm" onsubmit="handleSubmit(event)">
-                <div class="form-group">
-                    <label for="name">Họ và tên *</label>
-                    <input type="text" id="name" name="name" required placeholder="Nhập họ tên của bạn">
-                </div>
-
-                <div class="form-group">
-                    <label>Bạn có tham dự không? *</label>
-                    <div class="radio-group">
-                        <label>
-                            <input type="radio" name="attendance" value="yes" required>
-                            Có, tôi sẽ đến
-                        </label>
-                        <label>
-                            <input type="radio" name="attendance" value="no">
-                            Không thể tham dự
-                        </label>
+                <form class="rsvp-form" id="rsvpForm" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Tên của bạn *</label>
+                        <input type="text" id="name" name="name" required placeholder="Nhập tên của bạn">
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="guests">Số lượng khách</label>
-                    Photo Gallery Section
-                    <section class="section">
-                        <h2 class="section-title">Khoảnh Khắc Của Chúng Mình</h2>
-                        <div class="divider"></div>
-                        <p class="section-text">
-                            Những kỷ niệm đẹp trên hành trình yêu thương
-                        </p>
-
-                        <div class="photo-gallery">
-                            <!-- Large photo -->
-                            <div class="photo-item large">
-                                <img src="images/photo2.jpg" alt="Wedding Photo">
-                            </div>
-
-                            <!-- Small photos -->
-                            <div class="photo-item">
-                                <img src="images/photo3.jpg" alt="Wedding Photo">
-                            </div>
-                            <div class="photo-item">
-                                <img src="images/photo4.jpg" alt="Wedding Photo">
-                            </div>
-                            <div class="photo-item">
-                                <img src="images/photo5.jpg" alt="Wedding Photo">
-                            </div>
-                            <div class="photo-item">
-                                <img src="images/photo5.jpg" alt="Wedding Photo">
-                            </div>
+                    <div class="form-group">
+                        <label>Bạn có tham dự không? *</label>
+                        <div class="radio-group">
+                            <label class="radio-option" for="attend-yes">
+                                <input type="radio" name="attendance" value="yes" required id="attend-yes">
+                                <div class="radio-option-icon">✓</div>
+                                <div class="radio-option-text">Có, tôi sẽ đến</div>
+                            </label>
+                            <label class="radio-option" for="attend-no">
+                                <input type="radio" name="attendance" value="no" id="attend-no">
+                                <div class="radio-option-icon">✗</div>
+                                <div class="radio-option-text">Không thể tham dự</div>
+                            </label>
                         </div>
-                    </section>
+                    </div>
 
-                    <!--        <input type="number" id="guests" name="guests" min="1" max="10" value="1" placeholder="1">
-                </div>
+                    <!-- Honeypot field - ẩn khỏi user, chống bot -->
+                    <div style="position: absolute; left: -9999px; opacity: 0;">
+                        <label for="website_url">Website (không điền vào field này):</label>
+                        <input type="text" id="website_url" name="website_url" tabindex="-1">
+                    </div>
 
-                <div class="form-group">
-                    <label for="message">Lời chúc</label>
-                    <textarea id="message" name="message" placeholder="Gửi lời chúc đến cô dâu chú rể..."></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">Gửi Lời Chúc</button>
-            </form>
+                    <button type="submit" class="submit-btn">Gửi Xác Nhận</button>
+                </form>
+            </div>
         </section>
 
-        <!-- Love Quote Section -->
-                    <section class="section"
-                        style="background: rgba(255, 234, 167, 0.8); backdrop-filter: blur(10px); color: #2d3436; border-top: 2px solid rgba(253, 203, 110, 0.5); border-bottom: 2px solid rgba(253, 203, 110, 0.5);">
-                        <h2
-                            style="font-size: 42px; font-style: italic; margin-bottom: 20px; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);">
-                            "Love never fails"
-                        </h2>
-                        <p class="section-text"
-                            style="color: #2d3436; text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);">
-                    </section>
 
-                    <!-- Footer -->
-                    <footer class="footer">
-                        <div class="heart">♥</div>
-                        <p>Nguyễn Triệu Vĩ & Phan Trần Thị Thanh Thương</p>
-                        <p>22.03.2026</p>
-                        <p style="margin-top: 20px; font-size: 14px;">
-                            Thank you for being part of our special day
-                        </p>
-                    </footer>
-                </div>
 
-                <script>
-                    // Countdown Timer
-                    function updateCountdown() {
-                        const weddingDate = new Date('2026-03-22T11:00:00').getTime();
-                        const now = new Date().getTime();
-                        const distance = weddingDate - now;
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="heart">♥</div>
+            <p>Nguyễn Triệu Vĩ & Phan Trần Thị Thanh Thương</p>
+            <p>22.03.2026</p>
+            <p style="margin-top: 20px; font-size: 14px;">
+                Thank you for being part of our special day
+            </p>
+        </footer>
+    </div>
 
-                        if (distance < 0) {
-                            document.getElementById('countdown').innerHTML = '<p style="color: white; font-size: 20px;">Đám cưới đang diễn ra! 🎊</p>';
-                            return;
-                        }
+    <script>
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzYtajAfdhLMQd5zgQcCQQlQ3tmXJkujJs6TK5z2I0zZgFYigCU1GOe4tIgoiYCH_xo/exec';
 
-                        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        // Countdown Timer
+        function updateCountdown() {
+            const weddingDate = new Date('2026-03-22T11:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
 
-                        document.getElementById('days').textContent = days;
-                        document.getElementById('hours').textContent = hours;
-                        document.getElementById('minutes').textContent = minutes;
-                        document.getElementById('seconds').textContent = seconds;
-                    }
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = '<p style="color: white; font-size: 20px;">Đám cưới đang diễn ra! 🎊</p>';
+                return;
+            }
 
-                    // Update countdown every second
-                    updateCountdown();
-                    setInterval(updateCountdown, 1000);
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                    // RSVP Form Handler
-                    function handleSubmit(event) {
-                        event.preventDefault();
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
 
-                        const formData = new FormData(event.target);
-                        const data = {
-                            name: formData.get('name'),
-                            attendance: formData.get('attendance'),
-                            guests: formData.get('guests'),
-                            message: formData.get('message')
-                        };
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
 
-                        // Log to console (you can replace this with actual form submission)
-                        console.log('RSVP Submission:', data);
+        // Radio button animations
+        document.addEventListener('DOMContentLoaded', function () {
+            const radioOptions = document.querySelectorAll('.radio-option');
+            radioOptions.forEach(option => {
+                option.addEventListener('click', function () {
+                    // Remove selected class from all options
+                    radioOptions.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                });
+            });
+        });
 
-                        // Show success message
-                        alert('Cảm ơn bạn đã gửi lời chúc! ❤️\n\nChúng mình rất mong được gặp bạn trong ngày vui này.');
+        // Google Sheets submission function - SECURED VERSION
+        async function submitToGoogleSheets(data) {
+            try {
+                // Thêm timestamp chính xác
+                data.timestamp = new Date().toLocaleString('vi-VN', {
+                    timeZone: 'Asia/Ho_Chi_Minh',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
 
-                        // Reset form
-                        event.target.reset();
-                    }
+                // Thêm thông tin security
+                data.userAgent = navigator.userAgent;
+                data.screenResolution = `${screen.width}x${screen.height}`;
 
-                    // Smooth scroll animation
-                    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                        anchor.addEventListener('click', function (e) {
-                            e.preventDefault();
-                            const target = document.querySelector(this.getAttribute('href'));
-                            if (target) {
-                                target.scrollIntoView({ behavior: 'smooth' });
-                            }
-                        });
+                // Validate dữ liệu trước khi gửi
+                if (!validateClientData(data)) {
+                    throw new Error('Invalid data format');
+                }
+
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                return true;
+            } catch (error) {
+                console.error('Lỗi gửi đến Google Sheets:', error);
+                return false;
+            }
+        }
+
+        // Client-side validation để giảm spam
+        function validateClientData(data) {
+            // Kiểm tra honeypot
+            if (data.website_url && data.website_url.trim() !== '') {
+                console.log('Bot detected - honeypot filled');
+                return false;
+            }
+
+            // Validate name
+            if (!data.name || data.name.trim().length < 2) {
+                return false;
+            }
+
+            if (data.name.length > 100) {
+                return false;
+            }
+
+            // Check for suspicious patterns
+            const suspiciousPatterns = [
+                /<script/i,
+                /javascript:/i,
+                /onclick/i,
+                /<iframe/i
+            ];
+
+            if (suspiciousPatterns.some(pattern => pattern.test(data.name))) {
+                console.log('Suspicious content detected');
+                return false;
+            }
+
+            // Validate attendance
+            if (!['yes', 'no'].includes(data.attendanceValue)) {
+                return false;
+            }
+
+            return true;
+        }
+
+        // Rate limiting check (client-side)
+        function checkRateLimit() {
+            const submissionHistory = JSON.parse(
+                localStorage.getItem('rsvp_submissions') || '[]'
+            );
+
+            const now = Date.now();
+            const fiveMinutesAgo = now - (5 * 60 * 1000);
+
+            // Clean old submissions
+            const recentSubmissions = submissionHistory.filter(
+                time => time > fiveMinutesAgo
+            );
+
+            // Allow max 2 submissions per 5 minutes
+            if (recentSubmissions.length >= 2) {
+                return false;
+            }
+
+            // Update storage
+            recentSubmissions.push(now);
+            localStorage.setItem('rsvp_submissions', JSON.stringify(recentSubmissions));
+
+            return true;
+        }
+
+        // Show loading overlay
+        function showLoading() {
+            const overlay = document.createElement('div');
+            overlay.id = 'loading-overlay';
+            overlay.style.cssText = `
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background: rgba(0, 0, 0, 0.7);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            z-index: 9999;
+                            font-family: 'Playfair Display', serif;
+                            color: white;
+                            font-size: 18px;
+                        `;
+            overlay.innerHTML = `
+                            <div style="text-align: center;">
+                                <div style="font-size: 40px; margin-bottom: 20px;">⏳</div>
+                                <div>Đang gửi thông tin...</div>
+                            </div>
+                        `;
+            document.body.appendChild(overlay);
+        }
+
+        // Hide loading overlay
+        function hideLoading() {
+            const overlay = document.getElementById('loading-overlay');
+            if (overlay) {
+                overlay.remove();
+            }
+        }
+
+        // RSVP Form Handler - SECURED VERSION
+        async function handleSubmit(event) {
+            event.preventDefault();
+
+            // 1. Rate limiting check
+            if (!checkRateLimit()) {
+                showCustomAlert(
+                    '⏰ Gửi quá nhanh',
+                    'Vui lòng đợi 5 phút trước khi gửi lại để tránh spam.\nCảm ơn bạn đã hiểu! 🙏',
+                    'error'
+                );
+                return;
+            }
+
+            // Show loading
+            showLoading();
+
+            const formData = new FormData(event.target);
+
+            const data = {
+                name: formData.get('name')?.trim(),
+                attendance: formData.get('attendance') === 'yes' ? 'Có' : 'Không',
+                attendanceValue: formData.get('attendance'),
+                website_url: formData.get('website_url') // Honeypot
+            };
+
+            try {
+                // 2. Client-side validation
+                if (!validateClientData(data)) {
+                    throw new Error('Dữ liệu không hợp lệ');
+                }
+
+                // 3. Gửi đến Google Sheets
+                const success = await submitToGoogleSheets(data);
+
+                // Hide loading
+                hideLoading();
+
+                if (success) {
+                    showCustomAlert(
+                        '🎉 Cảm ơn bạn đã xác nhận!',
+                        '✅ Thông tin đã được ghi nhận an toàn.\n❤️ Chúng mình rất mong được gặp bạn trong ngày vui này!',
+                        'success'
+                    );
+
+                    // Reset form
+                    event.target.reset();
+                    document.querySelectorAll('.radio-option').forEach(opt => {
+                        opt.classList.remove('selected');
                     });
-                </script>
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                // Hide loading
+                hideLoading();
+
+                console.error('Submission error:', error);
+
+                showCustomAlert(
+                    '⚠️ Có lỗi xảy ra',
+                    'Vui lòng kiểm tra lại thông tin và thử lại.\nHoặc liên hệ trực tiếp với chúng mình. Cảm ơn! ❤️',
+                    'error'
+                );
+            }
+        }
+
+        // Custom alert function
+        function showCustomAlert(title, message, type = 'info') {
+            const alertDiv = document.createElement('div');
+            alertDiv.style.cssText = `
+                            position: fixed;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            background: white;
+                            padding: 40px;
+                            border-radius: 20px;
+                            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                            z-index: 10000;
+                            max-width: 400px;
+                            text-align: center;
+                            font-family: 'Cormorant Garamond', serif;
+                            border: 3px solid ${type === 'success' ? '#d4af37' : '#e74c3c'};
+                        `;
+
+            alertDiv.innerHTML = `
+                            <h3 style="font-family: 'Great Vibes', cursive; font-size: 28px; color: ${type === 'success' ? '#d4af37' : '#e74c3c'}; margin-bottom: 20px;">${title}</h3>
+                            <p style="font-size: 16px; line-height: 1.6; color: #333; margin-bottom: 30px;">${message}</p>
+                            <button onclick="this.parentElement.remove()" style="
+                                background: linear-gradient(135deg, #d4af37 0%, #f1c40f 100%);
+                                color: white;
+                                border: none;
+                                padding: 12px 30px;
+                                border-radius: 10px;
+                                font-size: 16px;
+                                font-family: 'Playfair Display', serif;
+                                cursor: pointer;
+                                font-weight: 600;
+                            ">Đóng</button>
+                        `;
+
+            document.body.appendChild(alertDiv);
+
+            // Auto remove after 10 seconds
+            setTimeout(() => {
+                if (alertDiv.parentElement) {
+                    alertDiv.remove();
+                }
+            }, 10000);
+        }
+
+        // Smooth scroll animation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
