@@ -2484,11 +2484,17 @@
             margin: 0;
         }
 
-        .music-player iframe {
+        .music-player audio {
             border-radius: 15px;
             width: 100%;
-            height: 180px;
-            display: block;
+            height: auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .music-player audio::-webkit-media-controls-panel {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
         }
 
         .music-subtitle {
@@ -2856,17 +2862,6 @@
         </div>
     </section>
 
-    <!-- Music Player Section -->
-    <section class="music-section">
-        <div class="music-player" id="musicPlayer">
-            <iframe width="560" height="315"
-                src="https://www.youtube.com/embed/ZalqX-zmTTw?si=VWQUj97GVYISoMHU&amp;start=10"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="heart">♥</div>
@@ -2893,27 +2888,29 @@
             const musicToggle = document.getElementById('musicToggle');
 
             if (isMusicMuted) {
-                // Unmute - Show player
+                // Unmute - Show player and play
                 musicPlayer.classList.remove('hidden');
                 musicIcon.textContent = '🔊';
                 musicText.textContent = 'Tắt nhạc';
                 musicToggle.classList.remove('muted');
 
-                // Reload YouTube iframe
+                // Play audio
                 if (musicFrame) {
-                    musicFrame.src = 'https://www.youtube.com/embed/ZalqX-zmTTw?si=P05yv6PVWJHJNWRX&controls=0&start=10&autoplay=1&loop=1';
+                    musicFrame.play().catch(e => console.log('Audio play failed:', e));
                 }
 
                 isMusicMuted = false;
             } else {
-                // Mute - Hide player
+                // Mute - Hide player and pause
                 musicPlayer.classList.add('hidden');
                 musicIcon.textContent = '🔇';
                 musicText.textContent = 'Bật nhạc';
                 musicToggle.classList.add('muted');
 
-                // Remove iframe src
-                if (musicFrame) musicFrame.src = '';
+                // Pause audio
+                if (musicFrame) {
+                    musicFrame.pause();
+                }
 
                 isMusicMuted = true;
             }
@@ -2926,12 +2923,24 @@
             const musicPlayer = document.getElementById('musicPlayer');
 
             if (musicFrame) {
-                console.log('Current iframe src:', musicFrame.src);
-                // Force reload with autoplay
-                musicFrame.src = 'https://www.youtube.com/embed/ZalqX-zmTTw?si=P05yv6PVWJHJNWRX&controls=0&start=10&autoplay=1&loop=1';
-                console.log('🎵 YouTube music reloaded with autoplay');
+                console.log('Audio element found');
+                console.log('Audio sources:', musicFrame.children.length);
+                
+                // Check if audio can be loaded
+                musicFrame.addEventListener('loadstart', () => console.log('🎵 Audio loading started'));
+                musicFrame.addEventListener('canplay', () => console.log('🎵 Audio can play'));
+                musicFrame.addEventListener('error', (e) => console.log('🎵 Audio error:', e));
+                
+                musicFrame.currentTime = 0; // Reset to beginning
+                musicFrame.play().then(() => {
+                    console.log('🎵 Audio playing successfully!');
+                    alert('Nhạc đang phát! 🎵');
+                }).catch(e => {
+                    console.log('🎵 Audio play failed:', e);
+                    alert('Không thể phát nhạc. Hãy đặt file "wedding-song.mp3" vào thư mục "audio/"');
+                });
             }
-
+            
             if (musicPlayer) {
                 musicPlayer.style.display = 'block';
                 musicPlayer.style.opacity = '1';
@@ -2983,11 +2992,13 @@
                     // Tự động load và phát nhạc khi user click lần đầu
                     console.log('🎵 Loading music on first user interaction');
                     const musicFrame = document.getElementById('musicFrame');
-                    const audioPlayer = document.getElementById('audioPlayer');
 
                     if (musicFrame) {
-                        musicFrame.src = 'https://www.youtube.com/embed/ZalqX-zmTTw?si=P05yv6PVWJHJNWRX&controls=0&start=10&autoplay=1&loop=1';
-                        console.log('🎵 YouTube iframe loaded on first click');
+                        musicFrame.play().then(() => {
+                            console.log('🎵 Audio started on first click');
+                        }).catch(e => {
+                            console.log('🎵 Audio failed on first click:', e);
+                        });
                     }
                 }
             }, { once: true });

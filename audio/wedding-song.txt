@@ -1,0 +1,8 @@
+# Placeholder for wedding song
+
+Đây là file placeholder. Hãy thay thế bằng file nhạc thật với tên:
+- wedding-song.mp3
+- wedding-song.ogg  
+- wedding-song.wav
+
+File nhạc sẽ tự động phát khi trang web được load.
