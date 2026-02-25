@@ -143,7 +143,7 @@
         }
 
         .handwritten-text {
-            font-size: 16px;
+            font-size: 12px;
             font-family: 'Great Vibes', cursive;
             color: #ffffff;
             margin: 40px 0;
@@ -413,7 +413,7 @@
         }
 
         .story-hero img {
-            width: 120%;
+            width: 100%;
             height: 100%;
             object-fit: cover;
             position: absolute;
@@ -1225,13 +1225,105 @@
                 font-size: 38px;
             }
 
-            .countdown-item {
-                min-width: 70px;
-                padding: 15px;
+            /* Extra small mobile adjustments for calendar-countdown */
+            .calendar-countdown-section {
+                gap: 10px;
+                margin: 8px 0;
+            }
+
+            .luxury-calendar-card,
+            .luxury-countdown-card {
+                display: none;
+            }
+
+            /* Story adjustments for small mobile */
+            .story-hero {
+                height: auto;
+                min-height: 250px;
+            }
+
+            .story-hero img {
+                position: relative;
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                max-height: 50vh;
+            }
+
+            /* Adjust overlay text for mobile */
+            .welcome-hero-overlay {
+                position: absolute !important;
+                top: 20px !important;
+                left: 20px !important;
+                right: 20px !important;
+                text-align: center !important;
+            }
+
+            /* Special case for header text overlay */
+            .welcome-hero-overlay.header-text {
+                position: absolute !important;
+                top: 15px !important;
+                left: 30% !important;
+                transform: translateX(-50%) !important;
+                width: auto !important;
+                max-width: 85% !important;
+                text-align: center !important;
+            }
+
+            .welcome-hero-overlay.header-text h3 {
+                position: relative !important;
+                margin: 0 !important;
+                font-size: 12px !important;
+                letter-spacing: 2px !important;
+                text-align: center !important;
+                color: #000000 !important;
+            }
+
+            /* Special case for bottom text overlay */
+            .welcome-hero-overlay.bottom-text {
+                position: absolute !important;
+                bottom: 20px !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: auto !important;
+                max-width: 85% !important;
+                text-align: center !important;
+                top: auto !important;
+                right: auto !important;
+            }
+
+            .welcome-hero-overlay h3 {
+                font-size: 18px !important;
+                letter-spacing: 4px !important;
+            }
+
+            .welcome-hero-overlay.bottom-text h3 {
+                position: relative !important;
+                bottom: auto !important;
+                margin: 0 !important;
+                font-size: 12px !important;
+                letter-spacing: 2px !important;
+                text-align: center !important;
+            }
+
+            .date-number {
+                font-size: 36px;
+            }
+
+            .calendar-title {
+                font-size: 20px;
             }
 
             .countdown-number {
-                font-size: 28px;
+                font-size: 18px;
+            }
+
+            .countdown-label {
+                font-size: 9px;
+            }
+
+            .countdown-item {
+                padding: 3px 0;
             }
 
             .calendar-date {
@@ -1241,25 +1333,46 @@
             .calendar-countdown-section {
                 flex-direction: column;
                 align-items: center;
-                gap: 20px;
+                gap: 15px;
+                margin: 10px 0;
             }
 
             .luxury-calendar-card,
             .luxury-countdown-card {
-                min-width: 250px;
-                padding: 0px;
+                min-width: 180px;
+                max-width: 280px;
+                width: 90%;
+                padding: 8px;
             }
 
             .date-number {
-                font-size: 52px;
+                font-size: 42px;
+            }
+
+            .calendar-title {
+                font-size: 24px;
+            }
+
+            .calendar-date-luxury {
+                margin: 5px 0;
             }
 
             .countdown-items {
-                gap: 0px;
+                gap: 5px;
+                margin-top: 10px;
+            }
+
+            .countdown-item {
+                padding: 5px 0;
             }
 
             .countdown-number {
-                font-size: 24px;
+                font-size: 20px;
+            }
+
+            .countdown-label {
+                font-size: 10px;
+                margin-top: 3px;
             }
 
             .photo-gallery {
@@ -1307,30 +1420,101 @@
             }
 
             .story-hero {
-                min-height: 350px;
+                min-height: 500px;
+                height: auto;
+                /* Allow container to adjust to image */
             }
 
-            .story-hero-text h3 {
-                font-size: 48px;
+            .story-hero img {
+                position: absolute;
+                /* Remove absolute positioning */
+                width: 100%;
+                height: 100%;
+                /* Keep aspect ratio */
+                object-fit: cover;
+                /* Show full image without cropping */
+                max-height: 700vh;
+                /* Limit height to viewport */
             }
 
-            .story-hero-text p {
-                font-size: 16px;
+            /* Adjust overlay text for medium mobile */
+            .welcome-hero-overlay {
+                position: absolute !important;
+                top: 30px !important;
+                left: 30px !important;
+                right: 30px !important;
+                text-align: center !important;
             }
 
-            .story-caption-section {
-                padding: 20px 20px;
+            /* Special case for header text overlay on medium mobile */
+            .welcome-hero-overlay.header-text {
+                position: absolute !important;
+                top: 20px !important;
+                left: 30% !important;
+                transform: translateX(-50%) !important;
+                width: auto !important;
+                max-width: 90% !important;
+                text-align: center !important;
             }
 
-            .story-caption-section p {
-                font-size: 18px;
-                line-height: 1.8;
+            .welcome-hero-overlay.header-text h3 {
+                position: relative !important;
+                margin: 0 !important;
+                font-size: 14px !important;
+                letter-spacing: 3px !important;
+                text-align: center !important;
+                color: #000000 !important;
             }
 
-            .welcome-photos {
-                grid-template-columns: 1fr;
-                gap: 10px;
+            /* Special case for bottom text overlay on medium mobile */
+            .welcome-hero-overlay.bottom-text {
+                position: absolute !important;
+                bottom: 25px !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: auto !important;
+                max-width: 90% !important;
+                text-align: center !important;
+                top: auto !important;
+                right: auto !important;
             }
+
+            .welcome-hero-overlay h3 {
+                font-size: 20px !important;
+                letter-spacing: 5px !important;
+            }
+
+            .welcome-hero-overlay.bottom-text h3 {
+                position: relative !important;
+                bottom: auto !important;
+                margin: 0 !important;
+                font-size: 12px !important;
+                letter-spacing: 3px !important;
+                text-align: center !important;
+            }
+        }
+
+        .story-hero-text h3 {
+            font-size: 48px;
+        }
+
+        .story-hero-text p {
+            font-size: 16px;
+        }
+
+        .story-caption-section {
+            padding: 20px 20px;
+        }
+
+        .story-caption-section p {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .welcome-photos {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
         }
 
         /* Animation */
@@ -1362,6 +1546,49 @@
             max-width: fit-content;
             margin: 0;
             /* text-decoration-style: double; */
+        }
+
+        /* Special case for header text - ensure it stays at top */
+        .welcome-hero-overlay.header-text {
+            position: absolute !important;
+            top: 20px !important;
+            left: 30% !important;
+            transform: translateX(-50%) !important;
+            width: auto !important;
+            max-width: 90% !important;
+            text-align: center !important;
+        }
+
+        .welcome-hero-overlay.header-text h3 {
+            position: relative !important;
+            margin: 0 !important;
+            color: #000000 !important;
+            font-size: 24px !important;
+            letter-spacing: 6px !important;
+            text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.8) !important;
+            text-align: center !important;
+        }
+
+        /* Special case for bottom text - ensure it stays at bottom */
+        .welcome-hero-overlay.bottom-text {
+            position: absolute !important;
+            bottom: 20px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: auto !important;
+            max-width: 100% !important;
+            text-align: center !important;
+        }
+
+        .welcome-hero-overlay.bottom-text h3 {
+            position: relative !important;
+            bottom: auto !important;
+            margin: 0 !important;
+            color: #ffffff !important;
+            font-size: 12px !important;
+            letter-spacing: 6px !important;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7) !important;
+            text-align: center !important;
         }
 
         .welcome-hero-overlay h2 {
@@ -1533,7 +1760,7 @@
         /* Responsive for welcome overlay */
         @media (max-width: 768px) {
             .welcome-hero-overlay {
-                padding: 30px 25px;
+                padding: 5px 25px;
                 max-width: 95%;
             }
 
@@ -1845,11 +2072,13 @@
             }
 
             .calendar-overlay {
-                position: relative;
+                position: fixed;
                 top: auto;
                 right: auto;
                 width: 100%;
-                margin-bottom: 20px;
+                margin-bottom: 0;
+                bottom: 0;
+                padding: 0 20px;
             }
 
             .event-info-overlay {
@@ -1866,7 +2095,7 @@
             }
 
             .event-calendar-card {
-                min-height: 600px;
+                min-height: 760px;
             }
         }
 
@@ -2370,7 +2599,7 @@
                 <!-- Image 1 - First Meeting -->
                 <div class="story-hero" style="margin-top: 0; width: 100%;">
                     <img src="images/studio-3.JPG" alt="Right love | Right reason | Right for you">
-                    <div class="welcome-hero-overlay"
+                    <div class="welcome-hero-overlay bottom-text"
                         style="font-family: 'Playfair Display', serif; opacity: 0.8;letter-spacing: 8px;">
                         <h3>RIGHT LOVE | RIGHT REASON </h3>
                     </div>
@@ -2563,103 +2792,83 @@
             </div>
         </section>
 
-        <!-- Our Story Section -->
         <section class="section" style="background: white;">
-            <div class="story-container" style="margin-top: 0px;gap: 2px;">
-                <!-- Image 1-->
-                <div class="story-hero" style="margin-top: 0; width: 100%;">
-                    <img src="images/story-bride-1.JPG" alt="Right love | Right reason | Right for you">
-                    <div class="welcome-hero-overlay"
-                        style="font-family: 'Playfair Display', serif; opacity: 0.8;letter-spacing: 8px;position: fixed;top: 50px;text-align: left;color: #000000;">
-                        <h3>BEAUTIFUL MOMENT</h3>
-                    </div>
-                </div>
-                <div class="story-hero" style="margin-top: 0; width: 100%;">
-                    <img src="images/story-groom-1.jpg" alt="Right love | Right reason | Right for you">
-                    <div class="welcome-hero-overlay"
-                        style="font-family: 'Playfair Display', serif; opacity: 1;letter-spacing: 8px;position: fixed;top: 114px;text-align: left;color: #000000;left: 112px;">
-                        <h3>FALL IN LOVE</h3>
-                    </div>
-                </div>
-                <div class="story-hero"
-                    style="margin-top: 0; width: 100%;height: 800px;padding: 30px; align-content: center;">
-                    <img src="images/SHO05837.JPG" alt="" style="width: 100%;left: 30px;">
-                </div>
-                <div class="story-hero" style="margin-top: 9px; width: 100%;padding: 30px; left: 20px">
-                    <img src="images/story-both-4.jpg" alt="Right love | Right reason | Right for you"
-                        style="width: 100%;">
-                    <div class="welcome-hero-overlay"
-                        style="font-family: 'Playfair Display', serif; opacity: 0.8;letter-spacing: 8px;position: fixed;bottom: 230px;text-align: left;color: #ffffffb2;left: 112px;">
-                        <h3>BIG LOVE FAMILY</h3>
-                    </div>
-                </div>
-                <div class="story-hero"
-                    style="margin-top: 0; width: 100%;padding: 30px; align-content: center; left: 20px">
-                    <img src="images/story-both-5.jpg" alt="Right love | Right reason | Right for you"
-                        style="width: 100%;filter: brightness(1.1)">
-                    <div class="welcome-hero-overlay"
-                        style="font-family: 'Playfair Display', serif; opacity: 1;letter-spacing: 11px;position: fixed;bottom: 120px;text-align: left;color: #000000a8;/*! left: 140px; */">
-                        <h3>NGÀY CHUNG ĐÔI</h3>
-                    </div>
-                </div>
+            <div class="story-container"">
+                <div class="story-hero">
+                <img src="images/story-bride-1.jpg" alt="Right love | Right reason | Right for you"
+                    style="width: 100%;">
             </div>
-        </section>
-
-
-        <!-- RSVP Section -->
-        <section class="rsvp-section">
-            <div class="rsvp-container">
-                <h2 class="rsvp-title">Xác Nhận Tham Dự</h2>
-                <p class="rsvp-subtitle">
-                    Mong bạn sẽ là người chứng kiến khoảnh khắc quan trọng nhất của chúng mình
-                </p>
-
-                <form class="rsvp-form" id="rsvpForm" onsubmit="handleSubmit(event)">
-                    <div class="form-group">
-                        <label for="name">Tên của bạn *</label>
-                        <input type="text" id="name" name="name" required placeholder="Nhập tên của bạn">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Bạn có tham dự không? *</label>
-                        <div class="radio-group">
-                            <label class="radio-option" for="attend-yes">
-                                <input type="radio" name="attendance" value="yes" required id="attend-yes">
-                                <div class="radio-option-icon">✓</div>
-                                <div class="radio-option-text">Có, tôi sẽ đến</div>
-                            </label>
-                            <label class="radio-option" for="attend-no">
-                                <input type="radio" name="attendance" value="no" id="attend-no">
-                                <div class="radio-option-icon">✗</div>
-                                <div class="radio-option-text">Không thể tham dự</div>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Honeypot field - ẩn khỏi user, chống bot -->
-                    <div style="position: absolute; left: -9999px; opacity: 0;">
-                        <label for="website_url">Website (không điền vào field này):</label>
-                        <input type="text" id="website_url" name="website_url" tabindex="-1">
-                    </div>
-
-                    <button type="submit" class="submit-btn">Gửi Xác Nhận</button>
-                </form>
+            <div class="story-hero">
+                <img src="images/story-groom-1.jpg" alt="Right love | Right reason | Right for you">
             </div>
-        </section>
+            <div class="story-hero">
+                <img src="images/SHO05837.JPG" alt="">
+            </div>
+            <div class="story-hero" ">
+                    <img src=" images/story-4.jpg" alt="Right love | Right reason | Right for you">
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="heart">♥</div>
-            <p>Nguyễn Triệu Vĩ & Phan Trần Thị Thanh Thương</p>
-            <p>22.03.2026</p>
-            <p style="margin-top: 20px; font-size: 14px;">
-                Thank you for being part of our special day
+            </div>
+            <div class="story-hero">
+                <img src="images/story-5.jpg" alt="Right love | Right reason | Right for you"
+                    style="filter: brightness(1.1)">
+            </div>
+    </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section class="rsvp-section">
+        <div class="rsvp-container">
+            <h2 class="rsvp-title">Xác Nhận Tham Dự</h2>
+            <p class="rsvp-subtitle">
+                Mong bạn sẽ là người chứng kiến khoảnh khắc quan trọng nhất của chúng mình
             </p>
-        </footer>
 
-        <iframe scrolling="no" width=600 height=180 src=https://zingmp3.vn/embed/song/Z7FDDIOI?start=true
-            frameborder="0" allowfullscreen="true" allow="autoplay">
-        </iframe>
+            <form class="rsvp-form" id="rsvpForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Tên của bạn *</label>
+                    <input type="text" id="name" name="name" required placeholder="Nhập tên của bạn">
+                </div>
+
+                <div class="form-group">
+                    <label>Bạn có tham dự không? *</label>
+                    <div class="radio-group">
+                        <label class="radio-option" for="attend-yes">
+                            <input type="radio" name="attendance" value="yes" required id="attend-yes">
+                            <div class="radio-option-icon">✓</div>
+                            <div class="radio-option-text">Có, tôi sẽ đến</div>
+                        </label>
+                        <label class="radio-option" for="attend-no">
+                            <input type="radio" name="attendance" value="no" id="attend-no">
+                            <div class="radio-option-icon">✗</div>
+                            <div class="radio-option-text">Không thể tham dự</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Honeypot field - ẩn khỏi user, chống bot -->
+                <div style="position: absolute; left: -9999px; opacity: 0;">
+                    <label for="website_url">Website (không điền vào field này):</label>
+                    <input type="text" id="website_url" name="website_url" tabindex="-1">
+                </div>
+
+                <button type="submit" class="submit-btn">Gửi Xác Nhận</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="heart">♥</div>
+        <p>Nguyễn Triệu Vĩ & Phan Trần Thị Thanh Thương</p>
+        <p>22.03.2026</p>
+        <p style="margin-top: 20px; font-size: 14px;">
+            Thank you for being part of our special day
+        </p>
+    </footer>
+
+    <iframe scrolling="no" width=600 height=180 src=https://zingmp3.vn/embed/song/Z7FDDIOI?start=true frameborder="0"
+        allowfullscreen="true" allow="autoplay">
+    </iframe>
     </div>
 
     <script>
