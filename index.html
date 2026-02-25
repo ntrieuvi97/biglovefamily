@@ -2162,6 +2162,167 @@
                 font-size: 18px;
             }
         }
+
+        /* Music Player Section */
+        .music-section {
+            background: linear-gradient(135deg, #f8f6f0 0%, #ede9e0 100%);
+            padding: 60px 30px;
+            position: relative;
+        }
+
+        .music-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23d4af37" fill-opacity="0.05"><path d="M20 20m-16 0a16,16 0 1,1 32,0a16,16 0 1,1 -32,0"/></g></svg>') repeat;
+            opacity: 0.5;
+        }
+
+        .music-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .music-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .music-title {
+            font-size: 36px;
+            font-family: 'Great Vibes', cursive;
+            color: #8b6f47;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: musicNote 4s ease-in-out infinite;
+        }
+
+        .music-toggle {
+            background: linear-gradient(135deg, #d4af37 0%, #f1c40f 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            font-size: 16px;
+        }
+
+        .music-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .music-toggle.muted {
+            background: linear-gradient(135deg, #95a5a6 0%, #bdc3c7 100%);
+            box-shadow: 0 4px 15px rgba(149, 165, 166, 0.3);
+        }
+
+        .music-player {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.1),
+                0 10px 30px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .music-player.hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            height: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        .music-player iframe {
+            border-radius: 15px;
+            width: 100%;
+            height: 180px;
+            display: block;
+        }
+
+        .music-subtitle {
+            text-align: center;
+            font-size: 16px;
+            font-family: 'Cormorant Garamond', serif;
+            color: #666;
+            font-style: italic;
+            margin-top: 25px;
+            margin-bottom: 0;
+        }
+
+        @keyframes musicNote {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-5px) rotate(5deg);
+            }
+
+            50% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            75% {
+                transform: translateY(-3px) rotate(-5deg);
+            }
+
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        /* Music responsive */
+        @media (max-width: 768px) {
+            .music-section {
+                padding: 40px 15px;
+            }
+
+            .music-container {
+                max-width: 100%;
+                margin: 0 10px;
+            }
+
+            .music-title {
+                font-size: 28px;
+            }
+
+            .music-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .music-player iframe {
+                height: 150px;
+            }
+
+            .music-toggle {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 
@@ -2486,8 +2647,6 @@
             </div>
         </section>
 
-
-
         <!-- Footer -->
         <footer class="footer">
             <div class="heart">♥</div>
@@ -2497,10 +2656,136 @@
                 Thank you for being part of our special day
             </p>
         </footer>
+
+        <iframe scrolling="no" width=600 height=180 src=https://zingmp3.vn/embed/song/Z7FDDIOI?start=true
+            frameborder="0" allowfullscreen="true" allow="autoplay">
+        </iframe>
     </div>
 
     <script>
+        // Google Sheets Web App URL - Bạn cần thay thế URL này
         const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzYtajAfdhLMQd5zgQcCQQlQ3tmXJkujJs6TK5z2I0zZgFYigCU1GOe4tIgoiYCH_xo/exec';
+
+        // Music Player Control
+        let isMusicMuted = false; // Mặc định nhạc được bật
+
+        function toggleMusic() {
+            const musicPlayer = document.getElementById('musicPlayer');
+            const musicFrame = document.getElementById('musicFrame');
+            const musicIcon = document.getElementById('musicIcon');
+            const musicText = document.getElementById('musicText');
+            const musicToggle = document.getElementById('musicToggle');
+
+            if (isMusicMuted) {
+                // Unmute - Show player
+                musicPlayer.classList.remove('hidden');
+                musicIcon.textContent = '🔊';
+                musicText.textContent = 'Tắt nhạc';
+                musicToggle.classList.remove('muted');
+
+                // Reload iframe để bắt đầu phát nhạc lại
+                const currentSrc = musicFrame.src;
+                musicFrame.src = '';
+                setTimeout(() => {
+                    musicFrame.src = currentSrc;
+                }, 100);
+
+                isMusicMuted = false;
+            } else {
+                // Mute - Hide player
+                musicPlayer.classList.add('hidden');
+                musicIcon.textContent = '🔇';
+                musicText.textContent = 'Bật nhạc';
+                musicToggle.classList.add('muted');
+
+                // Remove iframe src để dừng nhạc
+                musicFrame.src = '';
+
+                isMusicMuted = true;
+            }
+        }
+
+        // Test Music Function
+        function testMusic() {
+            console.log('🎵 Testing music...');
+            const musicFrame = document.getElementById('musicFrame');
+            const musicPlayer = document.getElementById('musicPlayer');
+
+            if (musicFrame) {
+                console.log('Current src:', musicFrame.src);
+                // Force reload
+                musicFrame.src = 'https://zingmp3.vn/embed/song/ZW6DIA67?start=true&autoplay=true';
+                console.log('🎵 Music reloaded with autoplay');
+            }
+
+            if (musicPlayer) {
+                musicPlayer.style.display = 'block';
+                musicPlayer.style.opacity = '1';
+                musicPlayer.classList.remove('hidden');
+                console.log('🎵 Music player forced visible');
+            }
+        }
+
+        // Auto-start music với user interaction (để tránh autoplay policy)
+        document.addEventListener('DOMContentLoaded', function () {
+            // Đảm bảo UI ban đầu hiển thị music player
+            const musicPlayer = document.getElementById('musicPlayer');
+            const musicIcon = document.getElementById('musicIcon');
+            const musicText = document.getElementById('musicText');
+            const musicToggle = document.getElementById('musicToggle');
+
+            // Đảm bảo music player luôn hiển thị (không ẩn)
+            if (musicPlayer) {
+                musicPlayer.classList.remove('hidden');
+                musicPlayer.style.display = 'block';
+                musicPlayer.style.opacity = '1';
+            }
+
+            // Cập nhật UI cho trạng thái bật nhạc
+            if (musicIcon) musicIcon.textContent = '🔊';
+            if (musicText) musicText.textContent = 'Tắt nhạc';
+            if (musicToggle) musicToggle.classList.remove('muted');
+
+            console.log('🎵 Music player initialized and visible');
+
+            // Debug: Kiểm tra các elements
+            console.log('Music Player Element:', musicPlayer);
+            console.log('Music Frame:', document.getElementById('musicFrame'));
+
+            // Scroll đến music section để user có thể thấy
+            setTimeout(() => {
+                const musicSection = document.querySelector('.music-section');
+                if (musicSection) {
+                    musicSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    console.log('🎵 Scrolled to music section');
+                }
+            }, 1000);
+
+            // Thêm event listener cho click đầu tiên trên trang để load nhạc
+            let firstClick = true;
+            document.addEventListener('click', function () {
+                if (firstClick) {
+                    firstClick = false;
+                    // Tự động load và phát nhạc khi user click lần đầu
+                    console.log('🎵 Loading music on first user interaction');
+                    const musicFrame = document.getElementById('musicFrame');
+                    if (musicFrame && musicFrame.src === '') {
+                        musicFrame.src = 'https://zingmp3.vn/embed/song/ZW6DIA67?start=true';
+                    }
+                }
+            }, { once: true });
+
+            // Thêm animation cho music title
+            const musicTitle = document.querySelector('.music-title');
+            if (musicTitle) {
+                setInterval(() => {
+                    musicTitle.style.transform = 'translateY(-2px) rotate(2deg)';
+                    setTimeout(() => {
+                        musicTitle.style.transform = 'translateY(0) rotate(0deg)';
+                    }, 200);
+                }, 3000);
+            }
+        });
 
         // Countdown Timer
         function updateCountdown() {
