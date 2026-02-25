@@ -249,43 +249,7 @@
             animation-delay: 0.3s;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes heartbeat {
-
-            0%,
-            100% {
-                transform: translateY(-50%) scale(1);
-            }
-
-            25% {
-                transform: translateY(-50%) scale(1.2);
-            }
-
-            50% {
-                transform: translateY(-50%) scale(1);
-            }
-        }
 
         .wedding-date {
             font-size: 28px;
@@ -562,17 +526,7 @@
             }
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
 
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Countdown */
         .countdown-wrapper {
             background: linear-gradient(135deg, #3e5e3a 0%, #5a8a52 100%);
             padding: 50px 30px;
@@ -1092,89 +1046,6 @@
             margin: 20px 0;
         }
 
-        /* Photo Gallery */
-        .photo-gallery {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 30px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .photo-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            aspect-ratio: 1;
-            background: linear-gradient(135deg, #e8d5f2 0%, #fbc723 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 14px;
-            text-align: center;
-            padding: 20px;
-            transition: transform 0.3s;
-        }
-
-        .photo-item:hover {
-            transform: scale(1.05);
-        }
-
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .photo-item.large {
-            grid-column: span 2;
-        }
-
-        /* Love Story Section */
-        .love-story-image {
-            max-width: 400px;
-            margin: 30px auto;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .love-story-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .love-story-placeholder {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            aspect-ratio: 4/3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 16px;
-            text-align: center;
-            padding: 40px;
-        }
-
-        /* Welcome Photos */
-        .welcome-photos {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 40px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
         .welcome-photo {
             position: relative;
             overflow: hidden;
@@ -1375,14 +1246,6 @@
                 margin-top: 3px;
             }
 
-            .photo-gallery {
-                grid-template-columns: 1fr;
-            }
-
-            .photo-item.large {
-                grid-column: span 1;
-            }
-
             /* RSVP responsive */
             .rsvp-section {
                 padding: 60px 20px;
@@ -1510,12 +1373,6 @@
             font-size: 18px;
             line-height: 1.8;
         }
-
-        .welcome-photos {
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-
 
         /* Animation */
         @keyframes fadeIn {
@@ -2392,170 +2249,128 @@
             }
         }
 
-        /* Music Player Section */
-        .music-section {
-            background: linear-gradient(135deg, #f8f6f0 0%, #ede9e0 100%);
-            padding: 60px 30px;
-            position: relative;
+        /* Floating Vinyl Music Player */
+        .vinyl-player {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 65px;
+            height: 65px;
+            cursor: pointer;
+            z-index: 9999;
+            transition: all 0.3s ease;
         }
 
-        .music-section::before {
+        .vinyl-player:hover {
+            transform: scale(1.1);
+        }
+
+        .vinyl-disc {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #1a1a1a 0%, #2d2d2d 30%, #1a1a1a 70%, #000 100%);
+            border-radius: 50%;
+            position: relative;
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.1),
+                inset 0 0 5px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .vinyl-disc::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23d4af37" fill-opacity="0.05"><path d="M20 20m-16 0a16,16 0 1,1 32,0a16,16 0 1,1 -32,0"/></g></svg>') repeat;
-            opacity: 0.5;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            bottom: 3px;
+            background: repeating-conic-gradient(from 0deg,
+                    #2d2d2d 0deg 2deg,
+                    #1a1a1a 2deg 4deg);
+            border-radius: 50%;
+            opacity: 0.7;
         }
 
-        .music-container {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .music-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .music-title {
-            font-size: 36px;
-            font-family: 'Great Vibes', cursive;
-            color: #8b6f47;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            animation: musicNote 4s ease-in-out infinite;
-        }
-
-        .music-toggle {
-            background: linear-gradient(135deg, #d4af37 0%, #f1c40f 100%);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-            font-size: 16px;
-        }
-
-        .music-toggle:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-        }
-
-        .music-toggle.muted {
-            background: linear-gradient(135deg, #95a5a6 0%, #bdc3c7 100%);
-            box-shadow: 0 4px 15px rgba(149, 165, 166, 0.3);
-        }
-
-        .music-player {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 20px;
+        .vinyl-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            background: radial-gradient(circle, #d4af37 0%, #b8941f 100%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
             box-shadow:
-                0 25px 60px rgba(0, 0, 0, 0.1),
-                0 10px 30px rgba(0, 0, 0, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(15px);
-            transition: all 0.3s ease;
-            overflow: hidden;
+                0 2px 8px rgba(0, 0, 0, 0.5),
+                inset 0 1px 2px rgba(255, 255, 255, 0.3);
         }
 
-        .music-player.hidden {
-            opacity: 0;
-            transform: translateY(-20px);
-            height: 0;
-            padding: 0;
-            margin: 0;
+        .vinyl-center::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: #8b6f47;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
         }
 
-        .music-player audio {
-            border-radius: 15px;
-            width: 100%;
-            height: auto;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+        .vinyl-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 35px;
+            height: 35px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .music-player audio::-webkit-media-controls-panel {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
+        /* Spinning animation */
+        .vinyl-spinning {
+            animation: vinylSpin 4s linear infinite;
         }
 
-        .music-subtitle {
-            text-align: center;
-            font-size: 16px;
-            font-family: 'Cormorant Garamond', serif;
-            color: #666;
-            font-style: italic;
-            margin-top: 25px;
-            margin-bottom: 0;
-        }
-
-        @keyframes musicNote {
-            0% {
-                transform: translateY(0) rotate(0deg);
+        @keyframes vinylSpin {
+            from {
+                transform: rotate(0deg);
             }
 
-            25% {
-                transform: translateY(-5px) rotate(5deg);
-            }
-
-            50% {
-                transform: translateY(0) rotate(0deg);
-            }
-
-            75% {
-                transform: translateY(-3px) rotate(-5deg);
-            }
-
-            100% {
-                transform: translateY(0) rotate(0deg);
+            to {
+                transform: rotate(360deg);
             }
         }
 
-        /* Music responsive */
+        /* Mobile responsive */
         @media (max-width: 768px) {
-            .music-section {
-                padding: 40px 15px;
+            .vinyl-player {
+                width: 50px;
+                height: 50px;
+                top: 15px;
+                right: 15px;
             }
 
-            .music-container {
-                max-width: 100%;
-                margin: 0 10px;
+            .vinyl-label {
+                width: 25px;
+                height: 25px;
             }
 
-            .music-title {
-                font-size: 28px;
+            .vinyl-center {
+                width: 12px;
+                height: 12px;
             }
 
-            .music-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .music-player iframe {
-                height: 150px;
-            }
-
-            .music-toggle {
-                padding: 10px 20px;
-                font-size: 14px;
+            .vinyl-center::before {
+                width: 4px;
+                height: 4px;
             }
         }
     </style>
@@ -2800,7 +2615,7 @@
 
         <section class="section" style="background: white;">
             <div class="story-container"">
-                <div class="story-hero">
+                <div class=" story-hero">
                 <img src="images/story-bride-1.jpg" alt="Right love | Right reason | Right for you"
                     style="width: 100%;">
             </div>
@@ -2811,7 +2626,7 @@
                 <img src="images/SHO05837.JPG" alt="">
             </div>
             <div class="story-hero">
-                    <img src=" images/story-4.jpg" alt="Right love | Right reason | Right for you">
+                <img src=" images/story-4.jpg" alt="Right love | Right reason | Right for you">
 
             </div>
             <div class="story-hero">
@@ -2862,6 +2677,23 @@
         </div>
     </section>
 
+    <!-- Floating Vinyl Music Player -->
+    <div id="vinylPlayer" class="vinyl-player" onclick="toggleVinylMusic()">
+        <div class="vinyl-disc" id="vinylDisc">
+            <div class="vinyl-center"></div>
+            <div class="vinyl-label">
+            </div>
+        </div>
+        <!-- Hidden audio element -->
+        <audio id="musicFrame" autoplay loop preload="auto" style="display: none;">
+            <source src="audio/wedding-song.mp3" type="audio/mpeg">
+            <source src="audio/wedding-song.ogg" type="audio/ogg">
+            <source src="audio/wedding-song.wav" type="audio/wav">
+            <!-- Fallback demo audio for testing -->
+            <source src="https://www.soundjay.com/misc/sounds-1/beep-3.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="heart">♥</div>
@@ -2877,141 +2709,168 @@
         // Google Sheets Web App URL - Bạn cần thay thế URL này
         const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzYtajAfdhLMQd5zgQcCQQlQ3tmXJkujJs6TK5z2I0zZgFYigCU1GOe4tIgoiYCH_xo/exec';
 
-        // Music Player Control
-        let isMusicMuted = false; // Mặc định nhạc được bật
+        // Vinyl Music Player Control
+        let isVinylPlaying = false;
 
-        function toggleMusic() {
-            const musicPlayer = document.getElementById('musicPlayer');
+        function toggleVinylMusic() {
+            const vinylDisc = document.getElementById('vinylDisc');
             const musicFrame = document.getElementById('musicFrame');
-            const musicIcon = document.getElementById('musicIcon');
-            const musicText = document.getElementById('musicText');
-            const musicToggle = document.getElementById('musicToggle');
 
-            if (isMusicMuted) {
-                // Unmute - Show player and play
-                musicPlayer.classList.remove('hidden');
-                musicIcon.textContent = '🔊';
-                musicText.textContent = 'Tắt nhạc';
-                musicToggle.classList.remove('muted');
-
-                // Play audio
+            if (!isVinylPlaying) {
+                // Start playing
                 if (musicFrame) {
-                    musicFrame.play().catch(e => console.log('Audio play failed:', e));
+                    musicFrame.play().then(() => {
+                        vinylDisc.classList.add('vinyl-spinning');
+                        isVinylPlaying = true;
+                        console.log('🎵 Vinyl started playing');
+                    }).catch(error => {
+                        console.log('🎵 Play failed:', error);
+                        alert('Không thể phát nhạc. Hãy đặt file "wedding-song.mp3" vào thư mục "audio/"');
+                    });
                 }
-
-                isMusicMuted = false;
             } else {
-                // Mute - Hide player and pause
-                musicPlayer.classList.add('hidden');
-                musicIcon.textContent = '🔇';
-                musicText.textContent = 'Bật nhạc';
-                musicToggle.classList.add('muted');
-
-                // Pause audio
+                // Pause
                 if (musicFrame) {
                     musicFrame.pause();
+                    vinylDisc.classList.remove('vinyl-spinning');
+                    isVinylPlaying = false;
+                    console.log('🎵 Vinyl paused');
                 }
-
-                isMusicMuted = true;
             }
         }
 
-        // Test Music Function
+        // Test Vinyl Music Function
         function testMusic() {
-            console.log('🎵 Testing music...');
+            console.log('🎵 Testing vinyl music...');
             const musicFrame = document.getElementById('musicFrame');
-            const musicPlayer = document.getElementById('musicPlayer');
+            const vinylPlayer = document.getElementById('vinylPlayer');
 
             if (musicFrame) {
                 console.log('Audio element found');
                 console.log('Audio sources:', musicFrame.children.length);
-                
+
                 // Check if audio can be loaded
                 musicFrame.addEventListener('loadstart', () => console.log('🎵 Audio loading started'));
                 musicFrame.addEventListener('canplay', () => console.log('🎵 Audio can play'));
+                musicFrame.addEventListener('loadeddata', () => console.log('🎵 Audio loaded'));
                 musicFrame.addEventListener('error', (e) => console.log('🎵 Audio error:', e));
-                
+
                 musicFrame.currentTime = 0; // Reset to beginning
-                musicFrame.play().then(() => {
-                    console.log('🎵 Audio playing successfully!');
-                    alert('Nhạc đang phát! 🎵');
-                }).catch(e => {
-                    console.log('🎵 Audio play failed:', e);
-                    alert('Không thể phát nhạc. Hãy đặt file "wedding-song.mp3" vào thư mục "audio/"');
-                });
+                toggleVinylMusic(); // Use vinyl toggle
             }
-            
-            if (musicPlayer) {
-                musicPlayer.style.display = 'block';
-                musicPlayer.style.opacity = '1';
-                musicPlayer.classList.remove('hidden');
-                console.log('🎵 Music player forced visible');
+
+            if (vinylPlayer) {
+                vinylPlayer.style.display = 'block';
+                vinylPlayer.style.opacity = '1';
+                console.log('🎵 Vinyl player forced visible');
             }
         }
 
-        // Auto-start music với user interaction (để tránh autoplay policy)
+        // Auto-start vinyl music ngay khi load trang
         document.addEventListener('DOMContentLoaded', function () {
-            // Đảm bảo UI ban đầu hiển thị music player
-            const musicPlayer = document.getElementById('musicPlayer');
-            const musicIcon = document.getElementById('musicIcon');
-            const musicText = document.getElementById('musicText');
-            const musicToggle = document.getElementById('musicToggle');
+            console.log('🎵 DOM Content Loaded - Initializing vinyl music player');
 
-            // Đảm bảo music player luôn hiển thị (không ẩn)
-            if (musicPlayer) {
-                musicPlayer.classList.remove('hidden');
-                musicPlayer.style.display = 'block';
-                musicPlayer.style.opacity = '1';
+            // Khởi tạo vinyl player elements
+            const vinylPlayer = document.getElementById('vinylPlayer');
+            const vinylDisc = document.getElementById('vinylDisc');
+            const musicFrame = document.getElementById('musicFrame');
+
+            console.log('Vinyl Player Element:', vinylPlayer);
+            console.log('Vinyl Disc:', vinylDisc);
+            console.log('Music Frame:', musicFrame);
+
+            // Đảm bảo vinyl player luôn hiển thị
+            if (vinylPlayer) {
+                vinylPlayer.style.display = 'block';
+                vinylPlayer.style.opacity = '1';
+                console.log('🎵 Vinyl player made visible');
+            } else {
+                console.error('❌ Vinyl player element not found!');
             }
 
-            // Cập nhật UI cho trạng thái bật nhạc
-            if (musicIcon) musicIcon.textContent = '🔊';
-            if (musicText) musicText.textContent = 'Tắt nhạc';
-            if (musicToggle) musicToggle.classList.remove('muted');
+            // Add audio event listeners for debugging
+            if (musicFrame) {
+                musicFrame.addEventListener('loadstart', () => console.log('🎵 Audio loading started'));
+                musicFrame.addEventListener('canplay', () => console.log('🎵 Audio can play'));
+                musicFrame.addEventListener('loadeddata', () => console.log('🎵 Audio loaded'));
+                musicFrame.addEventListener('error', (e) => console.log('🎵 Audio error:', e));
+                musicFrame.addEventListener('play', () => {
+                    console.log('🎵 Audio started playing');
+                    if (vinylDisc) vinylDisc.classList.add('vinyl-spinning');
+                    isVinylPlaying = true;
+                });
+                musicFrame.addEventListener('pause', () => {
+                    console.log('🎵 Audio paused');
+                    if (vinylDisc) vinylDisc.classList.remove('vinyl-spinning');
+                    isVinylPlaying = false;
+                });
 
-            console.log('🎵 Music player initialized and visible');
+                console.log('🎵 Audio event listeners added');
 
-            // Debug: Kiểm tra các elements
-            console.log('Music Player Element:', musicPlayer);
-            console.log('Music Frame:', document.getElementById('musicFrame'));
+                // TỰ ĐỘNG PHÁT NHẠC NGAY KHI LOAD TRANG
+                setTimeout(() => {
+                    console.log('🎵 Attempting autoplay...');
 
-            // Scroll đến music section để user có thể thấy
-            setTimeout(() => {
-                const musicSection = document.querySelector('.music-section');
-                if (musicSection) {
-                    musicSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    console.log('🎵 Scrolled to music section');
-                }
-            }, 1000);
+                    // Đảm bảo volume được bật
+                    musicFrame.volume = 1.0;
+                    musicFrame.muted = false;
 
-            // Thêm event listener cho click đầu tiên trên trang để load nhạc
-            let firstClick = true;
-            document.addEventListener('click', function () {
-                if (firstClick) {
-                    firstClick = false;
-                    // Tự động load và phát nhạc khi user click lần đầu
-                    console.log('🎵 Loading music on first user interaction');
-                    const musicFrame = document.getElementById('musicFrame');
+                    musicFrame.play().then(() => {
+                        console.log('🎵 ✅ Autoplay SUCCESS! Music started automatically');
+                        // Vinyl sẽ tự động xoay qua event listener 'play'
+                    }).catch(error => {
+                        console.log('🎵 ⚠️ Autoplay BLOCKED by browser:', error);
+                        console.log('🎵 Music will start on first user interaction');
 
-                    if (musicFrame) {
-                        musicFrame.play().then(() => {
-                            console.log('🎵 Audio started on first click');
-                        }).catch(e => {
-                            console.log('🎵 Audio failed on first click:', e);
-                        });
+                        // Fallback: Chờ user interaction
+                        let firstInteraction = true;
+                        const startMusicOnInteraction = () => {
+                            if (firstInteraction) {
+                                firstInteraction = false;
+                                // Đảm bảo volume được bật
+                                musicFrame.volume = 1.0;
+                                musicFrame.muted = false;
+                                musicFrame.play().then(() => {
+                                    console.log('🎵 ✅ Music started after user interaction');
+                                }).catch(e => {
+                                    console.log('🎵 ❌ Failed to start music:', e);
+                                });
+
+                                // Remove event listeners after first use
+                                document.removeEventListener('click', startMusicOnInteraction);
+                                document.removeEventListener('touchstart', startMusicOnInteraction);
+                                document.removeEventListener('keydown', startMusicOnInteraction);
+                            }
+                        };
+
+                        // Listen for any user interaction
+                        document.addEventListener('click', startMusicOnInteraction, { once: true });
+                        document.addEventListener('touchstart', startMusicOnInteraction, { once: true });
+                        document.addEventListener('keydown', startMusicOnInteraction, { once: true });
+                    });
+                }, 500); // Delay 500ms để đảm bảo all elements đã load
+
+            } else {
+                console.error('❌ Audio element not found!');
+            }
+
+            console.log('🎵 Vinyl music player initialized successfully');
+
+            // Thêm hover effect cho vinyl disc
+            if (vinylDisc) {
+                vinylDisc.addEventListener('mouseenter', () => {
+                    if (!isVinylPlaying) {
+                        vinylDisc.style.transform = 'scale(1.1)';
                     }
-                }
-            }, { once: true });
+                });
 
-            // Thêm animation cho music title
-            const musicTitle = document.querySelector('.music-title');
-            if (musicTitle) {
-                setInterval(() => {
-                    musicTitle.style.transform = 'translateY(-2px) rotate(2deg)';
-                    setTimeout(() => {
-                        musicTitle.style.transform = 'translateY(0) rotate(0deg)';
-                    }, 200);
-                }, 3000);
+                vinylDisc.addEventListener('mouseleave', () => {
+                    if (!isVinylPlaying) {
+                        vinylDisc.style.transform = 'scale(1)';
+                    }
+                });
+
+                console.log('🎵 Vinyl disc hover effects added');
             }
         });
 
