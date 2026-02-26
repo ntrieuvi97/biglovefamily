@@ -2357,31 +2357,45 @@
             transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+
         .fade-in-element.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         /* Staggered animations for multiple elements */
-        .fade-in-element:nth-child(1) { transition-delay: 0s; }
-        .fade-in-element:nth-child(2) { transition-delay: 0.2s; }
-        .fade-in-element:nth-child(3) { transition-delay: 0.4s; }
-        .fade-in-element:nth-child(4) { transition-delay: 0.6s; }
-        .fade-in-element:nth-child(5) { transition-delay: 0.8s; }
-        
+        .fade-in-element:nth-child(1) {
+            transition-delay: 0s;
+        }
+
+        .fade-in-element:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .fade-in-element:nth-child(3) {
+            transition-delay: 0.4s;
+        }
+
+        .fade-in-element:nth-child(4) {
+            transition-delay: 0.6s;
+        }
+
+        .fade-in-element:nth-child(5) {
+            transition-delay: 0.8s;
+        }
+
         /* Special romantic entrance for text elements */
         .romantic-fade {
             opacity: 0;
             transform: translateY(20px) scale(0.98);
             transition: all 1s ease-out;
         }
-        
+
         .romantic-fade.visible {
             opacity: 1;
             transform: translateY(0) scale(1);
         }
-        
+
         /* Floating hearts animation - enhanced */
         .floating-hearts {
             position: fixed;
@@ -2393,40 +2407,43 @@
             z-index: 5;
             overflow: hidden;
         }
-        
+
         .floating-heart {
             position: absolute;
             font-size: 16px;
             animation: floatUpRomantic 6s ease-out infinite;
             opacity: 0;
         }
-        
+
         @keyframes floatUpRomantic {
             0% {
                 opacity: 0;
                 transform: translateY(100vh) rotate(0deg) scale(0.5);
             }
+
             15% {
                 opacity: 0.7;
                 transform: translateY(80vh) rotate(45deg) scale(1);
             }
+
             80% {
                 opacity: 0.4;
                 transform: translateY(20vh) rotate(315deg) scale(0.8);
             }
+
             100% {
                 opacity: 0;
                 transform: translateY(-50px) rotate(360deg) scale(0.3);
             }
         }
-        
+
         /* Image fade ins */
         .image-reveal {
             opacity: 0;
             transform: scale(0.95);
             transition: all 1.2s ease-out;
         }
-        
+
         .image-reveal.visible {
             opacity: 1;
             transform: scale(1);
@@ -2781,7 +2798,9 @@
     <div class="floating-hearts" id="floatingHearts"></div>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" style="
+    font-family: 'Playfair Display';
+">
         <div class="heart">♥</div>
         <p>Nguyễn Triệu Vĩ & Phan Trần Thị Thanh Thương</p>
         <p>22.03.2026</p>
@@ -3295,96 +3314,96 @@
                 '.story-caption-section',
                 '.event-details-card'
             ];
-            
+
             elementsToAnimate.forEach(selector => {
                 const elements = document.querySelectorAll(selector);
                 elements.forEach(el => {
                     el.classList.add('fade-in-element');
                 });
             });
-            
+
             // Add romantic fade to special text elements
             const romanticElements = document.querySelectorAll('.hero-content h1, .hero-content p');
             romanticElements.forEach(el => el.classList.add('romantic-fade'));
-            
+
             // Add image reveal class
             const images = document.querySelectorAll('img');
             images.forEach(img => img.classList.add('image-reveal'));
-            
+
             console.log('🌹 Fade in elements prepared!');
         }
-        
+
         function handleRomanticScroll() {
             const elements = document.querySelectorAll('.fade-in-element:not(.visible), .romantic-fade:not(.visible), .image-reveal:not(.visible)');
-            
+
             elements.forEach(element => {
                 const rect = element.getBoundingClientRect();
                 const windowHeight = window.innerHeight;
-                
+
                 // Element is visible when it's 20% into the viewport
                 if (rect.top < windowHeight * 0.8 && rect.bottom > 0) {
                     element.classList.add('visible');
                 }
             });
         }
-        
+
         function createRomanticHeart() {
             const container = document.getElementById('floatingHearts');
             if (!container) return;
-            
+
             const hearts = ['💕', '💖', '✨', '🌹', '🌸', '💝'];
             const heart = document.createElement('div');
-            
+
             heart.className = 'floating-heart';
             heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
             heart.style.left = Math.random() * 100 + '%';
             heart.style.color = `hsl(${320 + Math.random() * 40}, 70%, 75%)`; // Pink/purple tones
             heart.style.animationDuration = (4 + Math.random() * 3) + 's';
             heart.style.animationDelay = Math.random() * 1 + 's';
-            
+
             container.appendChild(heart);
-            
+
             // Remove after animation
             setTimeout(() => {
                 if (heart.parentNode) heart.remove();
             }, 8000);
         }
-        
+
         // Initialize romantic scroll effects
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             initRomanticScrollEffects();
-            
+
             // Smooth scroll handler with throttling
             let isScrolling = false;
-            
+
             function onScroll() {
                 if (!isScrolling) {
                     window.requestAnimationFrame(() => {
                         handleRomanticScroll();
-                        
+
                         // Create hearts occasionally while scrolling
                         if (Math.random() > 0.9 && window.scrollY > 100) {
                             createRomanticHeart();
                         }
-                        
+
                         isScrolling = false;
                     });
                     isScrolling = true;
                 }
             }
-            
+
             window.addEventListener('scroll', onScroll, { passive: true });
-            
+
             // Initial check for elements already in view
             handleRomanticScroll();
-            
+
             // Create periodic romantic hearts
             setInterval(() => {
                 if (document.visibilityState === 'visible' && Math.random() > 0.6) {
                     createRomanticHeart();
                 }
             }, 4000);
-            
+
             console.log('🌹✨ Romantic fade in effects activated!');
         });
     </script>
