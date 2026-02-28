@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác Nhận Phương Tiện Đi Lại - Wedding</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♥</text></svg>">
+    <link rel="icon" type="image/ico" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .transportation-section {
+            padding: 60px 30px;
+            text-align: center;
+            background: linear-gradient(180deg,
+                    rgba(254, 252, 248, 0.95) 0%,
+                    rgba(248, 246, 242, 0.9) 15%,
+                    rgba(240, 237, 230, 0.85) 30%,
+                    rgba(245, 242, 236, 0.9) 45%,
+                    rgba(44, 62, 80, 0.95) 60%,
+                    rgba(52, 73, 94, 0.95) 75%,
+                    rgba(248, 246, 240, 0.9) 90%,
+                    rgba(255, 234, 167, 0.9) 100%);
+        }
+
+        .transportation-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 50px 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(139, 111, 71, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .transportation-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #8b6f47;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .transportation-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .transportation-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .transport-option {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .transport-option:hover {
+            border-color: #8b6f47;
+            background: #f5f2ec;
+            transform: translateX(5px);
+        }
+
+        .transport-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+            accent-color: #8b6f47;
+        }
+
+        .transport-option.selected {
+            border-color: #8b6f47;
+            background: #f0ede6;
+        }
+
+        .transport-option-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .transport-option-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .transport-option-description {
+            font-size: 14px;
+            color: #999;
+            line-height: 1.5;
+        }
+
+        .transport-icon {
+            font-size: 40px;
+            margin-right: 15px;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #8b6f47 0%, #6b5633 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-family: 'Playfair Display', serif;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #6b5633 0%, #5a4829 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(139, 111, 71, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-group label {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            font-family: 'Playfair Display', serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #8b6f47;
+            background: #fafafa;
+        }
+
+        .honeypot {
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+        }
+
+        /* Success Message Styling */
+        .success-message {
+            text-align: center;
+            padding: 40px 30px;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: slideDown 0.6s ease;
+        }
+
+        .success-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #8b6f47;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .success-choice {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #2c3e50;
+            margin: 10px 0;
+            font-style: italic;
+        }
+
+        .success-message-text {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.8;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        .thank-you-note {
+            background: linear-gradient(135deg, #f8f6f0 0%, #ede9e0 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #8b6f47;
+        }
+
+        .thank-you-note p {
+            margin: 8px 0;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .thank-you-note .heart {
+            color: #e74c3c;
+            margin: 15px 0;
+            font-size: 20px;
+        }
+
+        .invitation-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 35px;
+            background: linear-gradient(135deg, #8b6f47 0%, #6b5633 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            border: 2px solid #8b6f47;
+        }
+
+        .invitation-btn:hover {
+            background: linear-gradient(135deg, #6b5633 0%, #5a4829 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(139, 111, 71, 0.3);
+        }
+
+        .invitation-btn:active {
+            transform: translateY(0);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .transportation-hero {
+            background: linear-gradient(135deg, #8b6f47 0%, #6b5633 100%);
+            color: white;
+            padding: 60px 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        .transportation-hero h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .transportation-hero p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 18px;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .loading-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Transportation Confirmation Section -->
+        <section class="transportation-section">
+            <div class="transportation-container" id="transportationForm">
+                <h2 class="transportation-title">Xác Nhận Phương Tiện</h2>
+                <p class="transportation-subtitle">
+                    Vui lòng cho biết bạn sẽ tự di chuyển hay là mong muốn đi theo xe của đoàn
+                </p>
+
+                <form class="transportation-form" id="transportationFormElement"
+                    onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Tên của bạn *</label>
+                        <input type="text" id="name" name="name" required
+                            placeholder="Nhập tên của bạn">
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <label style="font-family: 'Playfair Display', serif; font-size: 14px; color: #333; font-weight: 600; display: block; margin-bottom: 15px;">
+                            Bạn sẽ đi lại bằng cách nào? *
+                        </label>
+
+                        <label class="transport-option" for="transport-self">
+                            <div class="transport-icon">🚗</div>
+                            <input type="radio" id="transport-self" name="transportation"
+                                value="self" required>
+                            <div class="transport-option-content">
+                                <div class="transport-option-title">Tôi sẽ tự di chuyển (tự túc)</div>
+                                <div class="transport-option-description">
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="transport-option" for="transport-group">
+                            <div class="transport-icon">🚐</div>
+                            <input type="radio" id="transport-group" name="transportation"
+                                value="group" required>
+                            <div class="transport-option-content">
+                                <div class="transport-option-title">Tôi mong muốn đi theo xe của đoàn</div>
+                                <div class="transport-option-description"></div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Honeypot field - ẩn khỏi user, chống bot -->
+                    <div class="honeypot">
+                        <label for="website_url">Website (không điền vào field này):</label>
+                        <input type="text" id="website_url" name="website_url"
+                            tabindex="-1">
+                    </div>
+
+                    <button type="submit" class="submit-btn">Xác Nhận Lựa Chọn</button>
+                </form>
+            </div>
+
+            <!-- Success Message (Hidden initially) -->
+            <div class="transportation-container success-message" id="successMessage"
+                style="display: none;">
+                <div class="success-icon">✨</div>
+                <div class="success-title">Cảm ơn bạn đã xác nhận!</div>
+                <p class="success-choice" id="selectedChoice"></p>
+                <div class="success-message-text">
+                    <p>Thông tin đã được ghi nhận an toàn. ✅</p>
+                    <p>Chúng mình rất mong được gặp bạn trong ngày vui này!</p>
+                </div>
+                <div class="thank-you-note">
+                    <p>💌 <strong>Lời cảm ơn chân thành</strong></p>
+                    <p>Cảm ơn bạn đã là một phần quan trọng trong cuộc sống của chúng mình. Sự hiện diện của bạn trong buổi tiệc sẽ tạo nên khoảnh khắc đáng nhớ không thể nào quên được.</p>
+                    <div class="heart">❤️ ❤️ ❤️</div>
+                    <p style="margin-top: 15px; font-style: italic;"><strong>Hẹn gặp bạn tại tiệc cưới! 🎊</strong></p>
+                    <a href="index.html" class="invitation-btn">📖 Xem Thiệp Cưới</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer" style="font-family: 'Playfair Display'; margin-top: 30px;">
+            <div class="heart">♥</div>
+            <p>Nguyễn Triệu Vĩ & Phan Trần Thị Thanh Thương</p>
+            <p style="margin-top: 20px; font-size: 14px;">
+                Thank you for being part of our special day
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Google Sheets Web App URL - Sử dụng URL RSVP hiện tại
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzc042koj7vnvyPB7WqxrYMPk6MXYzw5EROw1iT5U_XZE83jy6m_4EdVzjdEz97PDo/exec';
+
+        // Setup radio button animations
+        document.addEventListener('DOMContentLoaded', function () {
+            const transportOptions = document.querySelectorAll('.transport-option');
+            transportOptions.forEach(option => {
+                option.addEventListener('click', function () {
+                    // Remove selected class from all options
+                    transportOptions.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    // Check the radio button
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                });
+            });
+
+            // Also handle direct radio button clicks
+            document.querySelectorAll('input[type="radio"][name="transportation"]').forEach(radio => {
+                radio.addEventListener('change', function () {
+                    transportOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.closest('.transport-option').classList.add('selected');
+                });
+            });
+        });
+
+        // Show loading overlay
+        function showLoading() {
+            const overlay = document.createElement('div');
+            overlay.id = 'loading-overlay';
+            overlay.className = 'loading-overlay';
+            overlay.innerHTML = `
+                <div class="loading-content">
+                    <div class="loading-icon">⏳</div>
+                    <div>Đang gửi thông tin...</div>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+        }
+
+        // Hide loading overlay
+        function hideLoading() {
+            const overlay = document.getElementById('loading-overlay');
+            if (overlay) {
+                overlay.remove();
+            }
+        }
+
+        // Custom alert function
+        function showCustomAlert(title, message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                z-index: 10000;
+                max-width: 400px;
+                text-align: center;
+                font-family: 'Playfair Display', serif;
+            `;
+
+            const backdrop = document.createElement('div');
+            backdrop.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 9999;
+            `;
+
+            const titleEl = document.createElement('div');
+            titleEl.style.cssText = `
+                font-size: 24px;
+                margin-bottom: 15px;
+                color: ${type === 'success' ? '#27ae60' : '#e74c3c'};
+            `;
+            titleEl.textContent = title;
+
+            const messageEl = document.createElement('div');
+            messageEl.style.cssText = `
+                font-size: 14px;
+                color: #666;
+                margin-bottom: 20px;
+                line-height: 1.6;
+                white-space: pre-wrap;
+            `;
+            messageEl.textContent = message;
+
+            const button = document.createElement('button');
+            button.textContent = 'OK';
+            button.style.cssText = `
+                background: linear-gradient(135deg, #8b6f47 0%, #6b5633 100%);
+                color: white;
+                border: none;
+                padding: 10px 30px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-family: 'Playfair Display', serif;
+                font-weight: 600;
+            `;
+
+            button.onclick = () => {
+                alertDiv.remove();
+                backdrop.remove();
+            };
+
+            alertDiv.appendChild(titleEl);
+            alertDiv.appendChild(messageEl);
+            alertDiv.appendChild(button);
+
+            document.body.appendChild(backdrop);
+            document.body.appendChild(alertDiv);
+        }
+
+        // Validate client data
+        function validateClientData(data) {
+            // Kiểm tra honeypot
+            if (data.website_url && data.website_url.trim() !== '') {
+                console.log('Bot detected - honeypot filled');
+                return false;
+            }
+
+            // Validate name
+            if (!data.name || data.name.trim().length < 2) {
+                return false;
+            }
+
+            if (data.name.length > 100) {
+                return false;
+            }
+
+            // Check for suspicious patterns
+            const suspiciousPatterns = [
+                /<script/i,
+                /javascript:/i,
+                /onclick/i,
+                /<iframe/i
+            ];
+
+            if (suspiciousPatterns.some(pattern => pattern.test(data.name))) {
+                console.log('Suspicious content detected');
+                return false;
+            }
+
+            // Validate transportation choice
+            if (!['self', 'group'].includes(data.transportationValue)) {
+                return false;
+            }
+
+            return true;
+        }
+
+        // Rate limiting check
+        function checkRateLimit() {
+            const submissionHistory = JSON.parse(
+                localStorage.getItem('transportation_submissions') || '[]'
+            );
+
+            const now = Date.now();
+            const fiveMinutesAgo = now - (0.5 * 60 * 1000);
+
+            const recentSubmissions = submissionHistory.filter(
+                time => time > fiveMinutesAgo
+            );
+
+            if (recentSubmissions.length >= 2) {
+                return false;
+            }
+
+            recentSubmissions.push(now);
+            localStorage.setItem('transportation_submissions', JSON.stringify(recentSubmissions));
+
+            return true;
+        }
+
+        // Submit to Google Sheets
+        async function submitToGoogleSheets(data) {
+            try {
+                data.timestamp = new Date().toLocaleString('vi-VN', {
+                    timeZone: 'Asia/Ho_Chi_Minh',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+
+                data.userAgent = navigator.userAgent;
+                data.screenResolution = `${screen.width}x${screen.height}`;
+
+                if (!validateClientData(data)) {
+                    throw new Error('Invalid data format');
+                }
+
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                return true;
+            } catch (error) {
+                console.error('Lỗi gửi đến Google Sheets:', error);
+                return false;
+            }
+        }
+
+        // Form submission handler
+        async function handleSubmit(event) {
+            event.preventDefault();
+
+            if (!checkRateLimit()) {
+                showCustomAlert(
+                    '⏰ Gửi quá nhanh',
+                    'Vui lòng đợi 30 giây trước khi gửi lại để tránh spam.\nCảm ơn bạn đã hiểu! 🙏',
+                    'error'
+                );
+                return;
+            }
+
+            showLoading();
+
+            const formData = new FormData(event.target);
+
+            const transportationValue = formData.get('transportation');
+            const transportationText = transportationValue === 'self' 
+                ? 'Tôi sẽ tự di chuyển (tự túc)' 
+                : 'Tôi mong muốn đi theo xe của đoàn';
+
+            const data = {
+                name: formData.get('name')?.trim(),
+                transportation: transportationText,
+                transportationValue: transportationValue,
+                website_url: formData.get('website_url'), // Honeypot
+                eventType: 'transportation'
+            };
+
+            try {
+                if (!validateClientData(data)) {
+                    throw new Error('Dữ liệu không hợp lệ');
+                }
+
+                const success = await submitToGoogleSheets(data);
+                hideLoading();
+
+                if (success) {
+                    // Hide form and show success message
+                    document.getElementById('transportationForm').style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('selectedChoice').textContent = 
+                        `📍 Lựa chọn của bạn: ${transportationText}`;
+
+                    // Scroll to success message
+                    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                hideLoading();
+                console.error('Error:', error);
+                showCustomAlert(
+                    '❌ Có lỗi xảy ra',
+                    'Không thể gửi thông tin. Vui lòng kiểm tra kết nối mạng và thử lại.\n' + error.message,
+                    'error'
+                );
+            }
+        }
+    </script>
+</body>
+
+</html>
