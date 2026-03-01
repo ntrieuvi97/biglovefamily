@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album Ảnh - Nguyễn Triệu Vĩ & Phan Trần Thị Thanh Thương</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♥</text></svg>">
+    <link rel="icon" type="image/ico" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #f8f6f0 0%, #ede9e0 100%);
+            min-height: 100vh;
+        }
+
+        .album-header {
+            background: linear-gradient(135deg, #8b6f47 0%, #6b5633 100%);
+            color: white;
+            padding: 80px 30px;
+            text-align: center;
+        }
+
+        .album-header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 56px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .album-header p {
+            font-size: 18px;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        .album-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        .album-section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: #8b6f47;
+            margin-bottom: 50px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .album-section-title:first-child {
+            margin-top: 0;
+        }
+
+        .album-section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #d4af37, transparent);
+            margin: 20px auto 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            aspect-ratio: 1;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            filter: brightness(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Lightbox Styling */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+            pointer-events: none;
+        }
+
+        .lightbox-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .lightbox-counter {
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .album-header h1 {
+                font-size: 42px;
+            }
+
+            .album-header p {
+                font-size: 16px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .album-container {
+                padding: 40px 20px;
+            }
+
+            .album-section-title {
+                font-size: 24px;
+                margin-bottom: 30px;
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .album-header {
+                padding: 60px 20px;
+            }
+
+            .album-header h1 {
+                font-size: 36px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 10px;
+            }
+
+            .lightbox-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .lightbox-close {
+                width: 40px;
+                height: 40px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="back-link">← Quay lại</a>
+
+    <div class="album-header">
+        <h1>Album Ảnh</h1>
+        <p>Những khoảnh khắc đẹp của chúng mình</p>
+    </div>
+
+    <div class="album-container">
+        <!-- Studio Photoshoot -->
+        <h2 class="album-section-title">📸 Studio</h2>
+        <div class="gallery-grid" id="studioGallery"></div>
+
+        <!-- Pre-Wedding Photoshoot -->
+        <h2 class="album-section-title">💕 Pre-Wedding</h2>
+        <div class="gallery-grid" id="preWeddingGallery"></div>
+
+        <!-- Wedding Day Photos -->
+        <h2 class="album-section-title">👰 Tiệc Cưới</h2>
+        <div class="gallery-grid" id="weddingGallery"></div>
+
+        <!-- Story Photos -->
+        <h2 class="album-section-title">📖 Câu Chuyện</h2>
+        <div class="gallery-grid" id="storyGallery"></div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <div class="lightbox-content">
+            <div class="lightbox-nav">
+                <button class="lightbox-btn" onclick="prevImage()">❮</button>
+                <button class="lightbox-btn" onclick="nextImage()">❯</button>
+            </div>
+            <img src="" alt="Gallery image" class="lightbox-img" id="lightboxImg">
+            <div class="lightbox-counter">
+                <span id="currentIndex">1</span> / <span id="totalImages">1</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Image data organized by category
+        const imageData = {
+            studio: [
+                { src: 'images/Pre 14-010037.JPG', alt: 'Pre 1' },
+                { src: 'images/studio-2.JPG', alt: 'Studio 2' },
+                { src: 'images/studio-5.JPG', alt: 'Studio 5' },
+                { src: 'images/studio-1.JPG', alt: 'Studio 1' },
+                { src: 'images/Pre 14-010126.JPG', alt: 'Pre 4' },
+                { src: 'images/studio-3.JPG', alt: 'Studio 3' },
+                { src: 'images/Pre 14-010169.JPG', alt: 'Pre 5' },
+                { src: 'images/Pre 14-010109.JPG', alt: 'Pre 2' },
+                { src: 'images/Pre 14-010120.JPG', alt: 'Pre 3' },
+                { src: 'images/studio-4.JPG', alt: 'Studio 4' },
+                { src: 'images/Pre 14-010185.JPG', alt: 'Pre 6' },
+            ],
+            preWedding: [
+                { src: 'images/SHO05367.JPG', alt: 'Pre Wedding 2' },
+                { src: 'images/SHO05380.JPG', alt: 'Pre Wedding 3' },
+                { src: 'images/SHO05680.JPG', alt: 'Pre Wedding 4' },
+                { src: 'images/SHO05717.JPG', alt: 'Pre Wedding 5' },
+                { src: 'images/SHO05720.JPG', alt: 'Pre Wedding 6' },
+                { src: 'images/SHO05822.JPG', alt: 'Pre Wedding 7' },
+                { src: 'images/SHO05829.JPG', alt: 'Pre Wedding 9' },
+                { src: 'images/SHO05837.JPG', alt: 'Pre Wedding 10' },
+                { src: 'images/SHO05864.JPG', alt: 'Pre Wedding 11' },
+                { src: 'images/SHO05885.JPG', alt: 'Pre Wedding 12' },
+                { src: 'images/SHO05941.JPG', alt: 'Pre Wedding 13' },
+                { src: 'images/SHO05947.JPG', alt: 'Pre Wedding 14' },
+                { src: 'images/SHO05963.JPG', alt: 'Pre Wedding 15' },
+                { src: 'images/SHO06018.JPG', alt: 'Pre Wedding 16' },
+                { src: 'images/SHO06089.JPG', alt: 'Pre Wedding 17' },
+                { src: 'images/SHO06166.JPG', alt: 'Pre Wedding 18' },
+                { src: 'images/SHO06609.JPG', alt: 'Pre Wedding 19' },
+                { src: 'images/SHO06614.JPG', alt: 'Pre Wedding 20' },
+                { src: 'images/SHO06700.JPG', alt: 'Pre Wedding 21' },
+                { src: 'images/SHO06874.JPG', alt: 'Pre Wedding 22' },
+                { src: 'images/SHO06888.JPG', alt: 'Pre Wedding 23' },
+                { src: 'images/SHO07006.JPG', alt: 'Pre Wedding 24' },
+                { src: 'images/SHO07010.JPG', alt: 'Pre Wedding 25' },
+                { src: 'images/SHO07011.JPG', alt: 'Pre Wedding 26' },
+                { src: 'images/SHO07044.JPG', alt: 'Pre Wedding 27' },
+                { src: 'images/SHO07052.JPG', alt: 'Pre Wedding 28' },
+                { src: 'images/SHO07056.JPG', alt: 'Pre Wedding 30' },
+                { src: 'images/SHO07062.JPG', alt: 'Pre Wedding 32' }
+            ],
+            wedding: [
+            ]
+        };
+
+        let allImages = [];
+        let currentImageIndex = 0;
+
+        // Render gallery
+        function renderGallery(containerId, images) {
+            const container = document.getElementById(containerId);
+            images.forEach((image, index) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `
+                    <img src="${image.src}" alt="${image.alt}" loading="lazy">
+                    <div class="gallery-overlay">🔍</div>
+                `;
+                item.addEventListener('click', () => openLightbox(image.src));
+                container.appendChild(item);
+            });
+        }
+
+        // Lightbox functions
+        function openLightbox(imageSrc) {
+            allImages = Object.values(imageData).flat();
+            currentImageIndex = allImages.findIndex(img => img.src === imageSrc);
+            updateLightbox();
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateLightbox() {
+            const image = allImages[currentImageIndex];
+            document.getElementById('lightboxImg').src = image.src;
+            document.getElementById('currentIndex').textContent = currentImageIndex + 1;
+            document.getElementById('totalImages').textContent = allImages.length;
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % allImages.length;
+            updateLightbox();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+            updateLightbox();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') prevImage();
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Close lightbox when clicking outside image
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') closeLightbox();
+        });
+
+        // Initialize galleries
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGallery('studioGallery', imageData.studio);
+            renderGallery('preWeddingGallery', imageData.preWedding);
+            renderGallery('weddingGallery', imageData.wedding);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nguyễn Triệu Vĩ & Phan Trần Thị Thanh Thương - Landing</title>
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♥</text></svg>">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♥</text></svg>">
     <link rel="icon" type="image/ico" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -229,9 +232,11 @@
                 transform: translateY(100vh) translateX(0);
                 opacity: 0.8;
             }
+
             50% {
                 opacity: 0.6;
             }
+
             100% {
                 transform: translateY(-100vh) translateX(100px);
                 opacity: 0;
@@ -244,6 +249,7 @@
                 opacity: 0;
                 transform: translateY(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -255,6 +261,7 @@
                 opacity: 0;
                 transform: translateY(50px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -297,6 +304,11 @@
                 padding: 12px 30px;
                 font-size: 14px;
             }
+
+            .secondary-cards-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -332,8 +344,104 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+
+        /* Secondary Transportation Section */
+        .transportation-secondary {
+            margin-top: 80px;
+            padding-top: 60px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .transportation-secondary-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #999;
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .transportation-secondary-subtitle {
+            font-size: 14px;
+            color: #bbb;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .secondary-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .transportation-card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .transportation-secondary-card {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .transportation-card-link:hover .transportation-secondary-card {
+            background: rgba(255, 255, 255, 0.7);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transform: translateY(-8px);
+        }
+
+        .transportation-card-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .transportation-card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #8b6f47;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .transportation-card-description {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .transportation-secondary-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4af37 0%, #e8c547 100%);
+            color: white;
+            padding: 11px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.15);
+        }
+
+        .transportation-card-link:hover .transportation-secondary-btn {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.25);
+        }
     </style>
 </head>
+
 <body>
     <!-- Floating Hearts -->
     <div class="floating-hearts" id="floatingHearts"></div>
@@ -348,7 +456,7 @@
 
         <!-- Choices Grid -->
         <div class="choices-grid">
-           
+
             <!-- Bride - March Wedding -->
             <a href="wedding-march.html" class="choice-card">
                 <div class="card-frame">
@@ -370,9 +478,35 @@
                     <button class="view-btn">Xem Thiệp Mời</button>
                 </div>
             </a>
-
         </div>
-    </div>
+
+        <!-- Secondary Transportation Section -->
+        <div class="transportation-secondary">
+            <h3 class="transportation-secondary-title">PHỤ MỤC</h3>
+            
+            <div class="secondary-cards-grid">
+                <!-- Di Chuyển Card -->
+                <a href="transportation.html" class="transportation-card-link">
+                    <div class="transportation-secondary-card">
+                        <div class="transportation-card-icon">🚗</div>
+                        <h2 class="transportation-card-name">Di Chuyển</h2>
+                        <p class="transportation-card-description">Vui lòng xác nhận cách bạn sẽ di chuyển đến tiệc cưới</p>
+                        <button class="transportation-secondary-btn">Xác Nhận Ngay</button>
+                    </div>
+                </a>
+
+                <!-- Album Ảnh Card -->
+                <a href="album.html" class="transportation-card-link">
+                    <div class="transportation-secondary-card">
+                        <div class="transportation-card-icon">📸</div>
+                        <h2 class="transportation-card-name">Album Ảnh</h2>
+                        <p class="transportation-card-description">Những khoảnh khắc đẹp của chúng mình</p>
+                        <button class="transportation-secondary-btn">Xem Album</button>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
 
     <script>
         // Generate floating hearts
@@ -422,4 +556,5 @@
         });
     </script>
 </body>
+
 </html>
