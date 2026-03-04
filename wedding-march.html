@@ -60,7 +60,7 @@
             <div class="story-container" style="margin-top: -1px;">
                 <!-- Image 1 - First Meeting -->
                 <div class="story-hero" style="margin-top: 0; width: 100%;">
-                    <img src="images/studio-3.JPG" alt="Right love | Right reason | Right for you">
+                    <img src="images/greeting.jpg" alt="Right love | Right reason | Right for you">
                     <div class="welcome-hero-overlay bottom-text"
                         style="font-family: 'Playfair Display', serif; opacity: 0.8;letter-spacing: 8px;">
                         <h3>RIGHT LOVE | RIGHT REASON </h3>
@@ -257,99 +257,103 @@
 
         <section class="section" style="background: white;">
             <div class="story-container"">
-                    <div class=" story-hero">
-                <img src="images/story-1.JPG">
+                                <div class=" story-hero">
+                <img src="images/story-1.jpg">
+            </div>
+            <div class="story-container"">
+                                            <div class=" story-hero">
+                <img src="images/story-1-2.jpg">
             </div>
             <div class=" story-hero">
-                <img src="images/story-2.JPG">
+                <img src="images/story-2.jpg">
             </div>
             <div class="story-hero">
-                <img src="images/story-3.JPG" style="filter: brightness(1.1)">
-            </div>
-            <div class="story-hero">
-                <img src="images/story-4.jpg" style="filter: brightness(1.1)">
-            </div>
-            <div class="story-hero">
-                <img src="images/story-5.jpg" style="filter: brightness(1.1)">
-            </div>
-            <div class="story-hero">
-                <img src="images/story-6.jpg" style="filter: brightness(1.1)">
-            </div>
-    </div>
-    </section>
+                <img src="images/story-3.jpg" ">
+                    </div>
+                    <div class=" story-hero">
+                <img src="images/story-4.jpg" ">
+                    </div>
+                    <div class=" story-hero">
+                <img src="images/story-5.jpg" ">
+                    </div>
+                    <div class=" story-hero">
+                <img src="images/story-6.jpg" ">
+                    </div>
+        </div>
+        </section>
 
     <!-- RSVP Section -->
-    <section class="rsvp-section">
-        <div class="rsvp-container">
-            <h2 class="rsvp-title">Xác Nhận Tham Dự</h2>
-            <p class="rsvp-subtitle">
-                Mong bạn sẽ là người chứng kiến khoảnh khắc quan trọng nhất của chúng mình
-            </p>
+    <section class=" rsvp-section">
+                <div class="rsvp-container">
+                    <h2 class="rsvp-title">Xác Nhận Tham Dự</h2>
+                    <p class="rsvp-subtitle">
+                        Mong bạn sẽ là người chứng kiến khoảnh khắc quan trọng nhất của chúng mình
+                    </p>
 
-            <form class="rsvp-form" id="rsvpForm" onsubmit="handleSubmit(event)">
-                <div class="form-group">
-                    <label for="name">Tên của bạn *</label>
-                    <input type="text" id="name" name="name" required placeholder="Nhập tên của bạn">
+                    <form class="rsvp-form" id="rsvpForm" onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Tên của bạn *</label>
+                            <input type="text" id="name" name="name" required placeholder="Nhập tên của bạn">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Bạn có tham dự không? *</label>
+                            <div class="radio-group">
+                                <label class="radio-option" for="attend-yes">
+                                    <input type="radio" name="attendance" value="yes" required id="attend-yes">
+                                    <div class="radio-option-icon">✓</div>
+                                    <div class="radio-option-text">Có, tôi sẽ đến</div>
+                                </label>
+                                <label class="radio-option" for="attend-no">
+                                    <input type="radio" name="attendance" value="no" id="attend-no">
+                                    <div class="radio-option-icon">✗</div>
+                                    <div class="radio-option-text">Không thể tham dự</div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Honeypot field - ẩn khỏi user, chống bot -->
+                        <div style="position: absolute; left: -9999px; opacity: 0;">
+                            <label for="website_url">Website (không điền vào field này):</label>
+                            <input type="text" id="website_url" name="website_url" tabindex="-1">
+                        </div>
+
+                        <button type="submit" class="submit-btn">Gửi Xác Nhận</button>
+                    </form>
                 </div>
+        </section>
 
-                <div class="form-group">
-                    <label>Bạn có tham dự không? *</label>
-                    <div class="radio-group">
-                        <label class="radio-option" for="attend-yes">
-                            <input type="radio" name="attendance" value="yes" required id="attend-yes">
-                            <div class="radio-option-icon">✓</div>
-                            <div class="radio-option-text">Có, tôi sẽ đến</div>
-                        </label>
-                        <label class="radio-option" for="attend-no">
-                            <input type="radio" name="attendance" value="no" id="attend-no">
-                            <div class="radio-option-icon">✗</div>
-                            <div class="radio-option-text">Không thể tham dự</div>
-                        </label>
-                    </div>
+        <!-- Floating Vinyl Music Player -->
+        <div id="vinylPlayer" class="vinyl-player" onclick="toggleVinylMusic()">
+            <div class="vinyl-disc" id="vinylDisc">
+                <div class="vinyl-center"></div>
+                <div class="vinyl-label">
                 </div>
-
-                <!-- Honeypot field - ẩn khỏi user, chống bot -->
-                <div style="position: absolute; left: -9999px; opacity: 0;">
-                    <label for="website_url">Website (không điền vào field này):</label>
-                    <input type="text" id="website_url" name="website_url" tabindex="-1">
-                </div>
-
-                <button type="submit" class="submit-btn">Gửi Xác Nhận</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Floating Vinyl Music Player -->
-    <div id="vinylPlayer" class="vinyl-player" onclick="toggleVinylMusic()">
-        <div class="vinyl-disc" id="vinylDisc">
-            <div class="vinyl-center"></div>
-            <div class="vinyl-label">
             </div>
+            <!-- Hidden audio element -->
+            <audio id="musicFrame" loop preload="metadata" style="display: none;">
+                <source src="audio/wedding-song.mp3" type="audio/mpeg">
+                <source src="audio/wedding-song.ogg" type="audio/ogg">
+                <source src="audio/wedding-song.wav" type="audio/wav">
+                <!-- Fallback demo audio for testing -->
+                <source src="https://www.soundjay.com/misc/sounds-1/beep-3.mp3" type="audio/mpeg">
+            </audio>
         </div>
-        <!-- Hidden audio element -->
-        <audio id="musicFrame" loop preload="metadata" style="display: none;">
-            <source src="audio/wedding-song.mp3" type="audio/mpeg">
-            <source src="audio/wedding-song.ogg" type="audio/ogg">
-            <source src="audio/wedding-song.wav" type="audio/wav">
-            <!-- Fallback demo audio for testing -->
-            <source src="https://www.soundjay.com/misc/sounds-1/beep-3.mp3" type="audio/mpeg">
-        </audio>
-    </div>
 
-    <!-- Floating Hearts Container -->
-    <div class="floating-hearts" id="floatingHearts"></div>
+        <!-- Floating Hearts Container -->
+        <div class="floating-hearts" id="floatingHearts"></div>
 
-    <!-- Footer -->
-    <footer class="footer" style="
+        <!-- Footer -->
+        <footer class="footer" style="
     font-family: 'Playfair Display';
 ">
-        <div class="heart">♥</div>
-        <p>Nguyễn Triệu Vĩ & Phan Trần Thị Thanh Thương</p>
-        <p>22.03.2026</p>
-        <p style="margin-top: 20px; font-size: 14px;">
-            Thank you for being part of our special day
-        </p>
-    </footer>
+            <div class="heart">♥</div>
+            <p>Nguyễn Triệu Vĩ & Phan Trần Thị Thanh Thương</p>
+            <p>22.03.2026</p>
+            <p style="margin-top: 20px; font-size: 14px;">
+                Thank you for being part of our special day
+            </p>
+        </footer>
     </div>
     <a href="index.html" class="back-link">← Quay lại</a>
     <script>
