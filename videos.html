@@ -299,30 +299,31 @@
     <a href="index.html" class="back-link">← Quay lại</a>
 
     <div class="album-header">
-        <h1>Album Ảnh</h1>
+        <h1>Videos</h1>
         <p>Những khoảnh khắc đẹp của chúng mình</p>
     </div>
 
     <div class="album-container">
         <!-- Studio Photoshoot -->
-        <h2 class="album-section-title">📸 Studio</h2>
+        <!-- <h2 class="album-section-title">📸 Studio</h2>
         <div class="gallery-grid" id="studioGallery"></div>
 
         <!-- Pre-Wedding Photoshoot -->
-        <h2 class="album-section-title">💕 Pre-Wedding</h2>
-        <div class="gallery-grid" id="preWeddingGallery"></div>
+        <!-- <h2 class="album-section-title">💕 Pre-Wedding</h2>
+        <div class="gallery-grid" id="preWeddingGallery"></div> --> -->
 
         <!-- Wedding Day Photos -->
         <h2 class="album-section-title">👰 Tiệc Cưới</h2>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/iOILguTwHDA?si=u9FnK5__4kWg3Ubl"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <div class="gallery-grid" id="weddingGallery"></div>
+        <div class="gallery-grid" id="weddingGallery">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/iOILguTwHDA?si=u9FnK5__4kWg3Ubl"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
 
         <!-- Story Photos -->
-        <h2 class="album-section-title">📖 Câu Chuyện</h2>
-        <div class="gallery-grid" id="storyGallery"></div>
+        <!-- <h2 class="album-section-title">📖 Câu Chuyện</h2>
+        <div class="gallery-grid" id="storyGallery"></div> -->
     </div>
 
     <!-- Lightbox -->
@@ -356,63 +357,10 @@
     <script>
         // Image data organized by category
         const imageData = {
-            studio: [
-                { src: 'images/studio/Pre 14-0100081_(2).jpg', alt: 'Studio Pre 1' },
-                { src: 'images/studio/Pre 14-0100181_(2).jpg', alt: 'Studio Pre 2' },
-                { src: 'images/studio/Pre 14-0100691_(2).jpg', alt: 'Studio Pre 4' },
-                { src: 'images/studio/Pre 14-0100821_(2).jpg', alt: 'Studio Pre 5' },
-                { src: 'images/studio/Pre 14-0101091_(2).jpg', alt: 'Studio Pre 6' },
-                { src: 'images/studio/Pre 14-0101851_(2).jpg', alt: 'Studio Pre 10' },
-                { src: 'images/studio/Pre 14-0102081_(2).jpg', alt: 'Studio Pre 11' },
-                { src: 'images/studio/Pre 14-0102201_(2).jpg', alt: 'Studio Pre 12' },
-            ],
-            preWedding: [
-                { src: 'images/garden/SHO052611_(2).jpg', alt: 'Garden 1' },
-                { src: 'images/garden/SHO053321_(2).jpg', alt: 'Garden 2' },
-                { src: 'images/garden/SHO055361_(2).jpg', alt: 'Garden 4' },
-                { src: 'images/garden/SHO056781_(2).jpg', alt: 'Garden 5' },
-                { src: 'images/garden/SHO057501_(2).jpg', alt: 'Garden 9' },
-                { src: 'images/garden/SHO057651_(2).jpg', alt: 'Garden 10' },
-                { src: 'images/garden/SHO058371_(2).jpg', alt: 'Garden 15' },
-                { src: 'images/garden/SHO058851_(2).jpg', alt: 'Garden 18' },
-                { src: 'images/garden/SHO059081_(2).jpg', alt: 'Garden 19' },
-                { src: 'images/garden/SHO059251_(2).jpg', alt: 'Garden 20' },
-                { src: 'images/garden/SHO059631_(2).jpg', alt: 'Garden 24' },
-                { src: 'images/garden/SHO060001_(2).jpg', alt: 'Garden 25' },
-                { src: 'images/garden/SHO061021_(2).jpg', alt: 'Garden 28' },
-                { src: 'images/garden/SHO061071_(2).jpg', alt: 'Garden 29' },
-                { src: 'images/garden/SHO061401_(2).jpg', alt: 'Garden 30' },
-                { src: 'images/garden/SHO062421_(2).jpg', alt: 'Garden 32' },
-                { src: 'images/garden/SHO063211_(2).jpg', alt: 'Garden 33' },
-                { src: 'images/garden/SHO063801_(2).jpg', alt: 'Garden 34' },
-                { src: 'images/garden/SHO066031_(2).jpg', alt: 'Garden 35' },
-                { src: 'images/garden/SHO066331_(2).jpg', alt: 'Garden 38' },
-                { src: 'images/garden/SHO067761_(2).jpg', alt: 'Garden 40' },
-                { src: 'images/garden/SHO068231_(2).jpg', alt: 'Garden 41' },
-                { src: 'images/garden/SHO069081_(2).jpg', alt: 'Garden 44' },
-                { src: 'images/garden/SHO070261_(2).jpg', alt: 'Garden 48' },
-                { src: 'images/garden/SHO070601_(2).jpg', alt: 'Garden 53' },
-                { src: 'images/garden/SHO070661_(2).jpg', alt: 'Garden 56' },
-                { src: 'images/garden/SHO071191_(2).jpg', alt: 'Garden 57' }
-            ],
-            wedding: [
-            ],
-            story: [
-                { src: 'images/album/AB_01.jpg', alt: 'Album 1' },
-                { src: 'images/album/AB_02.jpg', alt: 'Album 2' },
-                { src: 'images/album/AB_03.jpg', alt: 'Album 3' },
-                { src: 'images/album/AB_04.jpg', alt: 'Album 4' },
-                { src: 'images/album/AB_05.jpg', alt: 'Album 5' },
-                { src: 'images/album/AB_06.jpg', alt: 'Album 6' },
-                { src: 'images/album/AB_07.jpg', alt: 'Album 7' },
-                { src: 'images/album/AB_08.jpg', alt: 'Album 8' },
-                { src: 'images/album/AB_09.jpg', alt: 'Album 9' },
-                { src: 'images/album/AB_10.jpg', alt: 'Album 10' },
-                { src: 'images/album/AB_11.jpg', alt: 'Album 11' },
-                { src: 'images/album/AB_12.jpg', alt: 'Album 12' },
-                { src: 'images/album/bìa ab 25x35.jpg', alt: 'Album Cover' },
-                { src: 'images/album/welcome-gate.jpg', alt: 'Cổng' }
-            ]
+            studio: [],
+            preWedding: [],
+            wedding: [],
+            story: []
         };
 
         let allImages = [];
